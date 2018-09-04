@@ -11,8 +11,12 @@ tokens_type = {
     '='     :   'tok_affect',
     '>'     :   'tok_gt',
     '<'     :   'tok_lt',
+    '('     :   'tok_bracket_op',
+    ')'     :   'tok_bracket_cl',
+    ';'     :   'tok_semicolomn',
 
     '=='    :   'tok_equals',
+    '!='    :   'tok_diff',
     '>='    :   'tok_geq',
     '<='    :   'tok_leq'
 }
@@ -43,10 +47,10 @@ class Token:
         self.col = col
 
     def __str__(self):
-        return '[' + str(self.type) + '] \t: ' + str(self.value) + ' \t('+ str(self.row) + ':' + str(self.col) +')'
+        return '[' + str(self.type) + '] \t: ' + str(self.value) + '\t('+ str(self.row) + ':' + str(self.col) +')'
 
 def main():
-    str_input = 'toto == a >= 12'
+    str_input = 'toto == a_B_c >= 12'
 
     Tokens_list = []
 
@@ -88,14 +92,14 @@ def main():
                 # SI LE CARACTERE EST UNE LETTRE, UN NOMBRE, OU UN INCONNUE
                 else:
                     # SI LE CARACTERE EST UNE LETTRE
-                    if char >= 'a' and char <= 'z' or char >= 'A' and char <= 'Z':
+                    if char >= 'a' and char <= 'z' or char >= 'A' and char <= 'Z' or char == '_':
                         
                         string = char
                         i += 1
                         while i < len(str_input):
 
                             char_read = str_input[i]
-                            if char_read >= 'a' and char_read <= 'z' or char_read >= 'A' and char_read <= 'Z' or char_read >= '0' and char_read <= '9':
+                            if char_read >= 'a' and char_read <= 'z' or char_read >= 'A' and char_read <= 'Z' or char_read >= '0' and char_read <= '9' or char_read == '_':
                                 string += char_read
                             else:
                                 break;
