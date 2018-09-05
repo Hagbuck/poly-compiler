@@ -33,7 +33,7 @@ class Token :
 tab_token = []
 
 #Code text (TEST)
-test_code = "if(a == b)c=123"
+test_code_file = "test_code.txt"
 
 #dictionnary of keyord
 hashmap_toke = {
@@ -58,7 +58,10 @@ hashmap_toke = {
 "if" : "toke_if",
 "else" : "toke_else",
 "elif" : "toke_elif",
-"while" : "toke_while"
+"while" : "toke_while",
+"return" : "toke_return",
+"true" : "toke_true",
+"false" : "toke_false"
 }
 
 # - * - * - * - * - * - * - * #
@@ -73,8 +76,20 @@ def RepresentsInt(s):
     except ValueError:
         return False
 
-#Fill the token tab with param code
-def lexique_analyze(code) :
+
+#Launch the lexical analyze line by line
+def lexique_analyze(fullCode) :
+    num_line = 1
+    for test_code in fullCode:
+        print "\nTEST CODE (Line : "+str(num_line)+") : "+test_code
+        print " - - - - - - - - - - - - -"
+        lexique_analyze_line(test_code,num_line)
+        print " - - - - - - - - - - - - -"
+        num_line = num_line + 1
+
+
+#Fill the token tab with param code = a line
+def lexique_analyze_line(code,num_line) :
 
     #char by char
     i = 0
@@ -83,13 +98,13 @@ def lexique_analyze(code) :
         current_char = code[i]
 
         #space
-        if(current_char == " ") :
+        if(current_char == " " or current_char == "\n" or current_char == "\t") :
             current_toke = Token(None,None,None);
 
 
         #know char (for one char)
         elif(current_char in hashmap_toke) :
-            current_toke = Token(hashmap_toke[current_char],1,i)
+            current_toke = Token(hashmap_toke[current_char],num_line,i)
 
 
         #other char
@@ -99,16 +114,16 @@ def lexique_analyze(code) :
 
             #If keyword
             if word in hashmap_toke :
-                current_toke = Token(hashmap_toke[word],1,i)
+                current_toke = Token(hashmap_toke[word],num_line,i)
 
             #If int
             elif RepresentsInt(word) :
-                current_toke = Token("toke_const",1,i)
+                current_toke = Token("toke_const",num_line,i)
                 current_toke.val = int(word)
 
             #identifier
             else :
-                current_toke = Token("toke_id",1,i)
+                current_toke = Token("toke_id",num_line,i)
                 current_toke.val = word
             #go next block
             i = i + rank - 1
@@ -117,7 +132,7 @@ def lexique_analyze(code) :
         #keyword with two char
         if(i+1 < len(code) ):
             if(str(current_char + code[i+1]) in hashmap_toke) :
-                current_toke = Token(hashmap_toke[str(current_char + code[i+1])],1,i)
+                current_toke = Token(hashmap_toke[str(current_char + code[i+1])],num_line,i)
                 i = i + 1
 
         #Add in tab if this is a true token
@@ -143,10 +158,13 @@ def check_identifier(text) :
 #            MAIN             #
 # - * - * - * - * - * - * - * #
 def main():
-    print "TEST CODE : "+test_code
-    print " - - - - - - - - - - - - -"
-    lexique_analyze(test_code)
-    print " - - - - - - - - - - - - -"
+    #FILE
+    full_test_code =  open(test_code_file, "r")
+    lines = full_test_code.readlines()
+    full_test_code.close()
+    #LEXICAL ANALYZE
+    lexique_analyze(lines)
+
 
 if __name__ == "__main__":
     # execute only if run as a script
