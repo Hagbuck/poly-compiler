@@ -31,7 +31,7 @@ class BasicNode(Node) :
     def __init__(self,token,child1,child2) :
         #inherit def
         Node.__init__(self,token)
-        self.type =  "TODO"
+        self.type =  getType(token.token)
         self.childs.append(child1)
         self.childs.append(child2)
         self.nbChild = 2
@@ -52,8 +52,15 @@ def getUnaireId(token_type) :
 def getTypeForLeave(token_type) :
     if token_type == "toke_const" :
         return "node_const"
-    else : 
+    else :
         return "node_id"
+
+#Get type
+def getType(token_type) :
+    if token_type in binaire_operator :
+        return binaire_operator[token_type]["type_node"]
+    else :
+        error_compilation(token,"Incompatible token")
 
 #Display the tree since a node given
 def display_tree(node,level) :

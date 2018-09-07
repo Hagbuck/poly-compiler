@@ -14,11 +14,12 @@ log_activation = False
 #dictionnary of keyord
 hashmap_toke = {
 #ONE CHAR
-"+" : "toke_plus",
-"-" : "toke_moins",
+"+" : "toke_add",
+"-" : "toke_min",
 "*" : "toke_mult",
 "/" : "toke_div",
-"^" : "toke_exp",
+"^" : "toke_pow",
+"%" : "toke_mod",
 "=" : "toke_assign",
 ";" : "toke_semicolon",
 ">" : "toke_ge",
@@ -26,7 +27,7 @@ hashmap_toke = {
 "!" : "toke_not",
 "," : "toke_virgule",
 "(" : "toke_parantOpen",
-")" : "tole_parantClose",
+")" : "toke_parantClose",
 "{" : "toke_braceOpen",
 "}" : "toke_braceClose",
 "[" : "toke_hookOpen",
@@ -50,7 +51,18 @@ hashmap_toke = {
 
 #UNAIRE OPERATOR
 unaire_operator = {
-    "toke_plus" : "node_plus",
-    "toke_moins" : "node_moins",
-    "toke_not" : "node_not"
+    "toke_add" : "node_add_U",
+    "toke_min" : "node_min_U",
+    "toke_not" : "node_not_U"
+}
+
+
+#BINAIRE OPERATOR
+binaire_operator = {
+"toke_pow" : { "type_node" : "node_pow" , "priority" : 1 , "associativity" : 1},
+"toke_mult" : { "type_node" : "node_mult" , "priority" : 2 , "associativity" : 0},
+"toke_div" : { "type_node" : "node_div" , "priority" : 2 , "associativity" : 0},
+"toke_mod" : { "type_node" : "node_mod" , "priority" : 2 , "associativity" : 0},
+"toke_add" : { "type_node" : "node_add" , "priority" : 3 , "associativity" : 0},
+"toke_min" : { "type_node" : "node_min" , "priority" : 3 , "associativity" : 0}
 }
