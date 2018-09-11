@@ -22,7 +22,7 @@ from synthax_analyze import *
 #            MAIN             #
 # - * - * - * - * - * - * - * #
 def main():
-    log_msg("INFO","Start compilator.")
+    log_msg("INFO","Start compilation.")
 
     #OPEN FILE
     full_test_code =  open(test_code_file, "r")
@@ -33,6 +33,8 @@ def main():
     #SYNTHAX ANALYZE
     racine_synthax = synthax_analyse()
     display_tree(racine_synthax,0)
+
+    #DISPLAY RESULT
     print "[RESULT] -> " +str(eval_expr(racine_synthax))
     log_msg("INFO","Compilation end.")
 

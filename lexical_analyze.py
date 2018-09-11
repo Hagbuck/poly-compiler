@@ -65,7 +65,7 @@ def lexique_analyze_line(code,num_line) :
             else :
                 current_toke = Token("toke_id",num_line,i)
                 current_toke.val = word
-                
+
             #go next block
             i = i + rank - 1
 
@@ -79,7 +79,7 @@ def lexique_analyze_line(code,num_line) :
         #Add in tab if this is a true token
         if(current_toke.token != None) :
             tab_token.append(current_toke)
-            print current_toke
+            #print current_toke
 
         #next element
         i = i + 1

@@ -51,9 +51,9 @@ def eval_expr(node) :
 
     #UNAIRE OPERATOR
     elif node.type == "node_add_U" :
-        return node.val
+        return eval_expr(node.childs[0])
     elif node.type == "node_min_U" :
-        return - eval_expr(node.val)
+        return - eval_expr(node.childs[0])
     #!
     elif node.type == "node_not_U" :
         if node.val == 0 :
