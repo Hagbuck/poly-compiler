@@ -19,6 +19,11 @@ def synthax_analyse() : #atom
 def atom() :
     #GET GLOBAL VAR
     global index_tab
+
+    #Search an atom but end of the list, so a paramter missing
+    if index_tab >= len(tab_token)  :
+        error_compilation(tab_token[index_tab-1],"Operator Missing the second parameter.")
+
     current_toke = tab_token[index_tab]
 
     #UNAIRE OPERATOR
@@ -36,13 +41,20 @@ def atom() :
     elif current_toke.token == "toke_parantOpen" :
         index_tab = index_tab + 1
         N = expr()
-        if tab_token[index_tab].token != "toke_parantClose" :
-            error_compilation(tab_token[index_tab],"Synthax Error")
+
+        #End expression
+        if index_tab >= len(tab_token) :
+            error_compilation(tab_token[len(tab_token)-1],"Parenthesis missing.")
+
+        #Missing parenthesis
+        elif tab_token[index_tab].token != "toke_parantClose" :
+            error_compilation(tab_token[index_tab],"Parenthesis missing.")
+
         index_tab = index_tab + 1
         return N
 
     #IMPLICIT ELSE --> Incompatible token
-    error_compilation(current_toke,"Synthax Error")
+    error_compilation(current_toke,"Incompatible Char.")
 
 
 def expr() :
@@ -55,12 +67,19 @@ def expr_launch(priority) :
     #Recup first atom
     A = atom()
 
+    #
+    #if index_tab < len(tab_token)-1 and
+
     #End of token list ?
-    if index_tab < len(tab_token) :
+    if index_tab < len(tab_token)  :
         current_toke = tab_token[index_tab]
 
+        #Toke const or id follow by a same other
+        if tab_token[index_tab].token == "toke_const" or tab_token[index_tab].token  == "toke_id" :
+            error_compilation(current_toke,"Constant or identifiant repetition without operator.")
 
-        while current_toke.token in binaire_operator and index_tab < len(tab_token)-1:
+
+        while current_toke.token in binaire_operator and index_tab < len(tab_token):
             #If priority superior
             if binaire_operator[current_toke.token]["priority"] >= priority :
                 break
@@ -71,12 +90,20 @@ def expr_launch(priority) :
             thisPriority = binaire_operator[current_toke.token]["priority"]
             thisAssociativity = binaire_operator[current_toke.token]["associativity"]
 
-            #Build Node (recursif)
-            N = BasicNode(current_toke,A,expr_launch(thisPriority + thisAssociativity))
+            #Build the second child (recursif)
+            secondChild = expr_launch(thisPriority + thisAssociativity)
+
+            #No second child
+            if(secondChild == None) :
+                error_compilation(current_toke,"Operator Missing the second parameter.")
+                break
+
+
+            N = BasicNode(current_toke,A,secondChild)
             A = N
 
             #End toke list ?
-            if index_tab < len(tab_token) :
+            if index_tab < len(tab_token) -1:
                 current_toke = tab_token[index_tab]
 
     return A

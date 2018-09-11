@@ -20,7 +20,6 @@ def lexique_analyze(fullCode) :
         print "\nTEST CODE (Line : "+str(num_line)+") : "+test_code
         print " - - - - - - - - - - - - -"
         lexique_analyze_line(test_code,num_line)
-        print " - - - - - - - - - - - - -"
         num_line = num_line + 1
 
 

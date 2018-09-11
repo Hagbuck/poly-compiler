@@ -11,6 +11,9 @@ test_code_file = "test_code.txt"
 log_file_name = "compil.log"
 log_activation = False
 
+#ASSEMBLOR FILE
+assemblor_file_name = "../MSM/assemblor_instruct.txt"
+
 #dictionnary of keyord
 hashmap_toke = {
 #ONE CHAR
@@ -65,4 +68,14 @@ binaire_operator = {
 "toke_mod" : { "type_node" : "node_mod" , "priority" : 2 , "associativity" : 0},
 "toke_add" : { "type_node" : "node_add" , "priority" : 3 , "associativity" : 0},
 "toke_min" : { "type_node" : "node_min" , "priority" : 3 , "associativity" : 0}
+}
+
+
+#BINAIRE DISCT FOR ASSEMBLOR
+dict_bin_node_to_assemblor = {
+"node_add" : "add.i",
+"node_min" : "sub.i",
+"node_mult" : "mul.i",
+"node_div" : "div.i",
+"node_mod" : "mod.i"
 }
