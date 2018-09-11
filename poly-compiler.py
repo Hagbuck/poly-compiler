@@ -8,6 +8,7 @@ from node import *
 from token import *
 from lexical_analyze import *
 from synthax_analyze import *
+from code_generator import *
 
 
 # - * - * - * - * - * - * - * #
@@ -33,6 +34,8 @@ def main():
     #SYNTHAX ANALYZE
     racine_synthax = synthax_analyse()
     display_tree(racine_synthax,0)
+    #GENERATE CODE
+    code_generator(racine_synthax)
 
     #DISPLAY RESULT
     print "[RESULT] -> " +str(eval_expr(racine_synthax))

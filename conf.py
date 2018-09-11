@@ -66,3 +66,12 @@ binaire_operator = {
 "toke_add" : { "type_node" : "node_add" , "priority" : 3 , "associativity" : 0},
 "toke_min" : { "type_node" : "node_min" , "priority" : 3 , "associativity" : 0}
 }
+
+#NODE LINKER OUTPUT CODE
+node_linker = {
+"node_mult" : "mul.i",
+"node_div" : "div.i",
+"node_mod" : "mod.i",
+"node_add" : "add.i",
+"node_min" : "sub.i"
+}
