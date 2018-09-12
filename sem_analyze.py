@@ -44,3 +44,13 @@ def search_symbol(ident, stack):
         i -= 1
     
     error_compilation(None, "Error : " + ident + " is not defined")
+
+
+def print_stack(stack):
+    print "\n-----------------------------\n"
+    str = ""
+    for table in stack:
+        str += "--"
+        for s in table:
+            print str + s
+    print "\n-----------------------------\n"
