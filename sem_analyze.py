@@ -24,7 +24,9 @@ def begin_block(stack):
 
 # At the end of a block, remove the symbol table previously generated
 def end_block(stack):
-    stack.pop()
+    # Do not remove the first table
+    if len(stack) > 1:
+        stack.pop()
 
 
 # Create a new symbol into the stack

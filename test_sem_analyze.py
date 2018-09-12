@@ -1,6 +1,7 @@
 from sem_analyze import *
 
 stack = [{}]
+end_block(stack)
 new_symbol("foo", stack)
 #new_symbol("fii", stack)
 begin_block(stack)
