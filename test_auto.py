@@ -21,7 +21,8 @@ code_src_test = [
     {"src" : "!256" , "res" : 0},
     {"src" : "!-256" , "res" : 0},
     {"src" : "!!256" , "res" : 1},
-    {"src" : "5 ^ 2 ^ 2" , "res" : pow(5, pow(2, 2))}
+    {"src" : "5 ^ 2 ^ 2" , "res" : pow(5, pow(2, 2))},
+    {"src" : "(5 ^ 2) ^ 2" , "res" : pow(pow(5,2),2)}
     ]
 
 
@@ -31,9 +32,9 @@ for i in range(0,len(code_src_test) ) :
     arbre = synthax_analyse()
     res = eval_expr(arbre)
     if res == code_src_test[i]["res"] :
-        print "[CODE "+str(i)+"] ~ [VALIDE] ~ ("+code_src_test[i]["src"]+") = "+str(code_src_test[i]["res"])
+        print "[CODE "+str(i)+"] ~ [VALIDE] ~ "+code_src_test[i]["src"]+" [=] "+str(code_src_test[i]["res"])
     else :
-        print '\033[91m' + "[CODE "+str(i)+"] ~ [ERROR] ~ ("+code_src_test[i]["src"]+") !=  "+str(res)+" [RES = "+str(code_src_test[i]["res"])+"]" + '\033[0m'
+        print '\033[91m' + "[CODE "+str(i)+"] ~ [ERROR] ~ "+code_src_test[i]["src"]+" [!=]  "+str(res)+" [RES = "+str(code_src_test[i]["res"])+"]" + '\033[0m'
     #RESET TAB
     tab_token = []
     index_tab = 0

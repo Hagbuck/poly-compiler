@@ -77,5 +77,6 @@ def eval_expr(node) :
         return eval_expr(node.childs[0]) * eval_expr(node.childs[1])
     elif node.type == "node_div" :
         return eval_expr(node.childs[0]) / eval_expr(node.childs[1])
-
+    elif node.type == "node_pow" :
+        return pow(eval_expr(node.childs[0]),eval_expr(node.childs[1]))
     #OTHER
