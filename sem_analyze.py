@@ -10,15 +10,22 @@ from symbol import *
 #         FUNCTIONS           #
 # - * - * - * - * - * - * - * #
 
+# Main function for the semantic analyse
+# TODO 
 def semantic_analyze(node):
     stack = [{}]
 
+
+# At the begin of a block, create a new table map of symbol
 def begin_block(stack):
     table = {}
     stack.append(table)
 
+
+# At the end of a block, remove the symbol table previously generated
 def end_block(stack):
     stack.pop()
+
 
 # Create a new symbol into the stack
 def new_symbol(ident, stack):
@@ -28,10 +35,10 @@ def new_symbol(ident, stack):
         error_compilation(None, "Error : " + ident + " is already defined")
         return
     
-    
     S = Symbol(ident)
     T[ident] = S
     return S
+
 
 # Research an ident into the stack
 def search_symbol(ident, stack):
@@ -46,6 +53,7 @@ def search_symbol(ident, stack):
     error_compilation(None, "Error : " + ident + " is not defined")
 
 
+# Display the stack
 def print_stack(stack):
     print "\n-----------------------------\n"
     str = ""
