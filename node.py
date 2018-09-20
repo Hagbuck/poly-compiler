@@ -1,8 +1,30 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                           Project : Compilateur (Python)                    #
+#                                                                             #
+#                                 File : node.py                              #
+#                                                                             #
+#      Description : Contains all node class declarations and functions.      #
+#                                                                             #
+#                Contributors : Corentin TROADEC & Anthony Vuillemin          #
+#                                                                             #
+#                               Date : September 2018                         #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+# - - - - - - - - - - - - - - - - - #
+#             IMPORT                #
+# - - - - - - - - - - - - - - - - - #
+
+# PROJECT MODULES
 from conf import *
 from utils import *
 
+
+# - - - - - - - - - - - - - - - - - #
+#           CLASS : Node            #
+# - - - - - - - - - - - - - - - - - #
+# For const and identifier
 class Node :
-    #Declaration
+    # Constructor
     def __init__(self,token) :
         self.type = getTypeForLeave(token.token)
         self.val = token.val
@@ -11,26 +33,35 @@ class Node :
         self.childs = []
         self.nbChild = 0
 
+    # Display method
     def __str__(self) :
         return "["+self.type+"] ~ "+str(self.val)+" ~ ("+str(self.line)+";"+str(self.col)+") ~ "+str(self.nbChild)+" child(s)"
 
-#For unaire operators
+
+# - - - - - - - - - - - - - - - - - #
+#        CLASS : NodeUnaire         #
+# - - - - - - - - - - - - - - - - - #
+# For unaire operator  : contain one child.
 class NodeUnaire(Node) :
 
     def __init__(self,token,child):
-        #inherit def
+        # inherit def
         Node.__init__(self,token)
-        #others declarations
+        # others declarations
         self.type = getUnaireId(token.token)
         self.childs.append(child)
         self.nbChild = 1
 
-#For binaire and others operators
+# - - - - - - - - - - - - - - - - - #
+#         CLASS : BasicNode         #
+# - - - - - - - - - - - - - - - - - #
+# For all the others node : contain at least two childs.
 class BasicNode(Node) :
 
     def __init__(self,token,child1,child2) :
         #inherit def
         Node.__init__(self,token)
+        # others declarations
         self.type =  getType(token.token)
         self.childs.append(child1)
         self.childs.append(child2)
@@ -40,6 +71,11 @@ class BasicNode(Node) :
     def add_child(self,child) :
         self.childs.append(child)
         self.nbChild = self.nbChild + 1
+
+
+# - - - - - - - - - - - - - - - - - #
+#           FUNCTIONS               #
+# - - - - - - - - - - - - - - - - - #
 
 #Get node type in relation with the token type
 def getUnaireId(token_type) :

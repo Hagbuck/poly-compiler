@@ -1,29 +1,42 @@
-# - * - * - * - * - * - * - * #
-#           IMPORT            #
-# - * - * - * - * - * - * - * #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                           Project : Compilateur (Python)                    #
+#                                                                             #
+#                             File : synthax_analyze.py                       #
+#                                                                             #
+#                   Description : Synthax analyze file and functions.         #
+#                                                                             #
+#                Contributors : Corentin TROADEC & Anthony Vuillemin          #
+#                                                                             #
+#                               Date : September 2018                         #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
 
-#PERSONNAL MODULE
+# - - - - - - - - - - - - - - - - - #
+#             IMPORT                #
+# - - - - - - - - - - - - - - - - - #
+
+# PROJECT MODULES
 from conf import *
 from node import *
 from token import *
 from utils import *
 
-# - * - * - * - * - * - * - * #
-#         FUNCTIONS           #
-# - * - * - * - * - * - * - * #
+# - - - - - - - - - - - - - - - - - #
+#           FUNCTIONS               #
+# - - - - - - - - - - - - - - - - - #
 
-def synthax_analyse() : #atom
+# Launch synthax analyze
+def synthax_analyse() :
     return expr()
 
-#Return a tree compose by leave (cont or id) & unaire operator
+# Return a tree compose by cons/id & unaire operator
 def atom() :
     #GET GLOBAL VAR
     global index_tab
 
     #Search an atom but end of the list, so a paramter missing
-    if index_tab >= len(tab_token)  :
+    if index_tab >= len(tab_token) : # and tab_token[-1].token != "toke_parantClose" :
         error_compilation(tab_token[index_tab-1],"Operator Missing the second parameter.")
-
+    #if index_tab < len(tab_token)-1 and
     current_toke = tab_token[index_tab]
 
     #UNAIRE OPERATOR
@@ -56,19 +69,17 @@ def atom() :
     #IMPLICIT ELSE --> Incompatible token
     error_compilation(current_toke,"Incompatible Char.")
 
-
+# Launch the synthax analyze with a high priority level
 def expr() :
     return expr_launch(1000);
 
+# Build a tree composed with the tokens tab
 def expr_launch(priority) :
 
     global index_tab
 
     #Recup first atom
     A = atom()
-
-    #
-    #if index_tab < len(tab_token)-1 and
 
     #End of token list ?
     if index_tab < len(tab_token)  :
@@ -79,7 +90,7 @@ def expr_launch(priority) :
             error_compilation(current_toke,"Constant or identifiant repetition without operator.")
 
 
-        while current_toke.token in binaire_operator and index_tab < len(tab_token):
+        while current_toke.token in binaire_operator and index_tab < len(tab_token) : # -1
             #If priority superior
             if binaire_operator[current_toke.token]["priority"] >= priority :
                 break
