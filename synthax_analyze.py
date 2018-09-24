@@ -89,6 +89,9 @@ def expr_launch(priority) :
         if tab_token[index_tab].token == "toke_const" or tab_token[index_tab].token  == "toke_id" :
             error_compilation(current_toke,"Constant or identifiant repetition without operator.")
 
+        #Toke is an open paranthesis.
+        if current_toke.token == "toke_parantOpen" :
+            error_compilation(current_toke,"Illegal expression.")
 
         while current_toke.token in binaire_operator and index_tab < len(tab_token) : # -1
             #If priority superior
@@ -114,7 +117,7 @@ def expr_launch(priority) :
             A = N
 
             #End toke list ?
-            if index_tab < len(tab_token) -1:
+            if index_tab < len(tab_token) : #-1
                 current_toke = tab_token[index_tab]
 
     return A

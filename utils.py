@@ -44,8 +44,8 @@ def error_compilation(token_or_node,msg) :
     # BUILD MSG
     error_msg = "[ERROR] ~ " + msg +"\n"
     error_msg +=  "[ERROR] ~ An error has been detected : Line "+str(token_or_node.line)
-    error_msg += "\n[ERROR] ~ "+str(token_or_node)
-    error_msg +=" & Column "+str(token_or_node.col)+".\n"
+    error_msg +=" & Column "+str(token_or_node.col)+"."
+    error_msg += "\n[ERROR] ~ "+str(token_or_node)+"\n"
     #P RINT
     print header_error_msg + '\033[93m' + error_msg +'\033[0m'
     # SAVE IN LOG & EXIT

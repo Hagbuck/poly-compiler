@@ -62,13 +62,14 @@ if test_natural_operator :
         arbre = synthax_analyse()
         res = eval_expr(arbre)
         if res == code_src_test_natural_operator[i]["res"] :
-            print "[CODE "+str(i)+"] ~ [VALIDE] ~ "+code_src_test_natural_operator[i]["src"]+" [=] "+str(code_src_test_natural_operator[i]["res"])
+            print "[CODE "+str(i)+"] ~ "+ '\033[92m' + "[VALIDE]"+'\033[0m'+" ~ "+code_src_test_natural_operator[i]["src"]+" [=] "+str(code_src_test_natural_operator[i]["res"])
         else :
             print '\033[91m' + "[CODE "+str(i)+"] ~ [ERROR] ~ "+code_src_test_natural_operator[i]["src"]+" [!=]  "+str(res)+" [RES = "+str(code_src_test_natural_operator[i]["res"])+"]" + '\033[0m'
         #RESET TAB
         tab_token = []
         index_tab = 0
 
+print "\n \n"
 
 if test_logic_operator :
     print "==================================="
@@ -80,7 +81,7 @@ if test_logic_operator :
         arbre = synthax_analyse()
         res = eval_expr(arbre)
         if res == code_src_test_logic_operator[i]["res"] :
-            print "[CODE "+str(i)+"] ~ [VALIDE] ~ "+code_src_test_logic_operator[i]["src"]+" [=] "+str(code_src_test_logic_operator[i]["res"])
+            print "[CODE "+str(i)+"] ~ "+ '\033[92m' + "[VALIDE]"+'\033[0m'+" ~ "+code_src_test_logic_operator[i]["src"]+" [=] "+str(code_src_test_logic_operator[i]["res"])
         else :
             print '\033[91m' + "[CODE "+str(i)+"] ~ [ERROR] ~ "+code_src_test_logic_operator[i]["src"]+" [!=]  "+str(res)+" [RES = "+str(code_src_test_logic_operator[i]["res"])+"]" + '\033[0m'
         #RESET TAB
