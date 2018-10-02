@@ -49,7 +49,7 @@ def genCode(N) :
 
     # OTHER TYPE (Ignore node and go to childs)
     else :
-        print "[WARN] ~ Operation pass : "+str(N)
+        DEBUG_MSG("Ignore node : "+str(N),"WARN")
         genCode(N.childs[0])
 
 # Code generator (assemblor instrutions) launch

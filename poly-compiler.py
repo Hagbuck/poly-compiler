@@ -25,6 +25,7 @@ from code_generator import *
 
 # SYSTEM MODULES
 import os
+import sys
 
 # - - - - - - - - - - - - - - - - - #
 #                VARS               #
@@ -39,7 +40,7 @@ import os
 #                MAIN               #
 # - - - - - - - - - - - - - - - - - #
 def main():
-    log_msg("INFO","Start compilation.")
+    log_msg("START","Start compilation.")
 
     # Delete old assemblor file (code generate during compilation)
     if os.path.isfile(assemblor_file_name) :
@@ -56,17 +57,44 @@ def main():
     # Launch synthax analyze (tree recuperation)
     racine_synthax = synthax_analyse()
     # Display the tree generate
-    display_tree(racine_synthax,0)
+
+    if stat_debug_mode() :
+        display_tree(racine_synthax,0)
 
     # Launch compilation (generation of the assemblor code)
     compil(racine_synthax)
 
     # Evalution of the final result (work only for mathematics expression)
-    print "[RESULT] -> " +str(eval_expr(racine_synthax))
+    DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
 
-    log_msg("INFO","Compilation end.")
+    log_msg("END","Compilation end.")
+    log_msg("INFO","Assemblor file (relative PATH) : "+assemblor_file_name)
 
 
+# Execute only if run as a script
 if __name__ == "__main__":
-    # Execute only if run as a script
+
+    # Active debug mod ?
+    #if len(sys.argv) > 1 :
+
+    for arg in sys.argv :
+
+        if arg.lower() == "-d"  :
+            active_debug_mod()
+            DEBUG_MSG("DEBUG MOD : ON.","INFO")
+
+        elif arg.lower() == "-l" :
+            active_log_save()
+            DEBUG_MSG("LOG SAVE : ON.","INFO")
+
+        elif arg.lower() == "-ld" or arg == "-dl" :
+            active_debug_mod()
+            active_log_save()
+            DEBUG_MSG("DEBUG MOD : ON.","INFO")
+            DEBUG_MSG("LOG SAVE : ON.","INFO")
+
+        elif arg != sys.argv[0] :
+            print "[WARN] ~ Unknow console parameter : "+arg
+
+    # Main process
     main()

@@ -17,9 +17,12 @@
 # Code source file use
 test_code_file = "test_code.txt"
 
-# Log informations
+# Log informations (save log in a file) - True tu force save, -l in console
 log_file_name = "compil.log"    # File use to save log
 log_activation = False          # Active log (display on console & save on file)
+
+# Debug mod (active debug informations) - True to force debug, -d in console.
+debug_mod = False
 
 # File use to save the generated codee (Assemblor instruction)
 assemblor_file_name = "../MSM/assemblor_instruct.txt"
