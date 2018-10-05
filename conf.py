@@ -23,6 +23,7 @@ log_activation = False          # Active log (display on console & save on file)
 
 # Debug mod (active debug informations) - True to force debug, -d in console.
 debug_mod = False
+debug_mod_line = "============================================"
 
 # File use to save the generated codee (Assemblor instruction)
 assemblor_file_name = "../MSM/assemblor_instruct.txt"

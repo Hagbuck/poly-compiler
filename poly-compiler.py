@@ -40,7 +40,7 @@ import sys
 #                MAIN               #
 # - - - - - - - - - - - - - - - - - #
 def main():
-    log_msg("START","Start compilation.")
+    DEBUG_MSG("Start compilation.","START")
 
     # Delete old assemblor file (code generate during compilation)
     if os.path.isfile(assemblor_file_name) :
@@ -50,25 +50,42 @@ def main():
     full_test_code =  open(test_code_file, "r")
     lines = full_test_code.readlines()
     full_test_code.close()
+    DEBUG_MSG("Source File : "+test_code_file,"INFO")
+    DEBUG_MSG("Total lines : "+str(len(lines)),"INFO")
 
     # Launch lexical analyze
+    DEBUG_MSG(debug_mod_line)
+    DEBUG_MSG("Start lexical analyse.","START")
     lexique_analyze(lines)
+    DEBUG_MSG("End of the lexical analyse.","OK")
+    DEBUG_MSG("Token tab built.","TOKENS")
+    cpt = 0
+    for a_toke in tab_token :
+        DEBUG_MSG(str(a_toke),"TOKEN "+str(cpt))
+        cpt = cpt + 1
 
     # Launch synthax analyze (tree recuperation)
+    DEBUG_MSG(debug_mod_line)
+    DEBUG_MSG("Start synthax analyse.","START")
     racine_synthax = synthax_analyse()
+    DEBUG_MSG("End of the synthax analyse.","OK")
     # Display the tree generate
 
-    if stat_debug_mode() :
-        display_tree(racine_synthax,0)
+    DEBUG_MSG("Tree built.","TREE")
+    DEBUG_MSG("\n" + display_tree(racine_synthax,0))
 
     # Launch compilation (generation of the assemblor code)
+    DEBUG_MSG(debug_mod_line)
+    DEBUG_MSG("Start compilation stage.","START")
     compil(racine_synthax)
+    DEBUG_MSG("End of the compilation stage.","OK")
 
     # Evalution of the final result (work only for mathematics expression)
     DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
 
-    log_msg("END","Compilation end.")
-    log_msg("INFO","Assemblor file (relative PATH) : "+assemblor_file_name)
+    DEBUG_MSG(debug_mod_line)
+    DEBUG_MSG("Compilation end.","END")
+    DEBUG_MSG("Assemblor file (relative PATH) : "+assemblor_file_name,"INFO")
 
 
 # Execute only if run as a script

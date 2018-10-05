@@ -104,8 +104,11 @@ def display_tree(node,level) :
     string_space = ""
     for i in range(0,level) :
         string_space += "\t"
-    print string_space + str(node)
+    # Tree string - print
+    return_str = string_space + str(node) + "\n"
     #DISPLAY CHILDS
     if node != None :
         for child in node.childs :
-            display_tree(child,level + 1)
+            # Add string child in string racien
+            return_str += display_tree(child,level + 1) 
+    return return_str

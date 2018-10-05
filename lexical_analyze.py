@@ -32,8 +32,7 @@ def lexique_analyze(fullCode) :
     num_line = 1
     # For each lines
     for test_code in fullCode:
-        DEBUG_MSG("\nCURRENT CODE (Line : "+str(num_line)+") : "+test_code)
-        DEBUG_MSG("- - - - - - - - - - - - - - - - - - - -")
+        DEBUG_MSG("CURRENT CODE (Line : "+str(num_line)+") : "+test_code[:-1],"LINE") #WARNING -1 test
         # Read line and build token
         lexique_analyze_line(test_code,num_line)
         # Next line

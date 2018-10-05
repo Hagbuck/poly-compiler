@@ -57,16 +57,20 @@ def error_compilation(token_or_node,msg) :
 
 # Write logs in an file
 def log_msg(type,msg, compil_error = False) :
-    # Already display when this is a compilation error msg.
-    if compil_error == False :
-        print "["+type+"] ~ " + msg
 
-    if(log_activation == True):
+    if log_activation == True :
+        # Already display when this is a compilation error msg.
+        #if compil_error == False :
+        #    print "["+type+"] ~ " + msg
+
         now = datetime.datetime.now()
         str_now = now.strftime("%d/%m/%Y %H:%M:%S-")
         str_now += str(now.microsecond)
         log_file =  open(log_file_name, "a+")
-        log_file.write("["+type+"] - "+str_now+" ~ "+msg+"\n")
+        if type != "" :
+            log_file.write("["+type+"] - "+str_now+" ~ "+msg+"\n")
+        else :
+            log_file.write(msg+"\n")
 
 
 # Active debug mod
@@ -79,8 +83,14 @@ def stat_debug_mode() :
     return debug_mod
 
 # Display debug message if debug mod is on
-def DEBUG_MSG(msg,type = "") :
-    # debug mod on ?
+def DEBUG_MSG(msg,type = "",saveInLogFile = True) :
+
+    # Save in log file ?
+    if saveInLogFile == True :
+        log_msg(type,msg)
+
+
+    # Debug mod on ?
     if debug_mod == True :
         if type != "" :
             print "["+type+"] ~ "+msg
@@ -126,6 +136,8 @@ def eval_expr(node) :
         return eval_expr(node.childs[0]) / eval_expr(node.childs[1])
     elif node.type == "node_pow" :
         return pow(eval_expr(node.childs[0]),eval_expr(node.childs[1]))
+    elif node.type == "node_mod" :
+        return eval_expr(node.childs[0]) % eval_expr(node.childs[1])
 
     #BINAIRE LOGIC OPERATOR
     elif node.type == "node_equal" :
