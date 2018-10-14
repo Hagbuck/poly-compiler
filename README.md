@@ -61,7 +61,7 @@ Exemple :
 
 ## Configuration
 Ce compilateur propose certains paramétrages de configuration. Pour ce faire, ouvrez avec un éditeur de votre choix le fichier ***conf.py***. Attention cependant à ne modifier que ce qu'il y a dans le bloc **ALTERABLE VARS**.
-- ***test_code_file*** ~ Par défaut renseigné à **test_code.txt**. Modifiez le paramètre pour changer le fichier source à utiliser pour la compilation.
+- ***test_code_file*** ~ Par défaut renseigné à **test_code.txt**. Modifiez le paramètre pour changer le fichier source à utiliser pour la compilation. ***Non prioritaire si un fichier source est renseigné en paramètre de la ligne de commande.***
 - ***log_file_name*** ~ Par défaut renseigné à **compil.log**. Modifiez le paramètre pour changer le fichier de sauvegarde des logs.
 - ***log_activation*** ~ Par défaut renseigné à **False**. Mettre à **True** pour forcer dans tout les cas la sauvegarde des logs en fichier.
 - ***debug_mod*** ~ Par défaut renseigné à **False**. Mettre à **True** pour forcer l'activation du mode debug dans tout les cas.
