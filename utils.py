@@ -73,6 +73,15 @@ def log_msg(type,msg, compil_error = False) :
             log_file.write(msg+"\n")
 
 
+# Change src file
+def change_src_file(ext_file) :
+    global test_code_file
+    test_code_file = ext_file
+
+# Return src file used
+def used_src_file() :
+    return test_code_file
+
 # Active debug mod
 def active_debug_mod() :
     global debug_mod

@@ -47,10 +47,11 @@ def main():
         os.remove(assemblor_file_name)
 
     # Read source file (to apply the compilation)
-    full_test_code =  open(test_code_file, "r")
+    used_file = used_src_file()
+    full_test_code =  open(used_file, "r")
     lines = full_test_code.readlines()
     full_test_code.close()
-    DEBUG_MSG("Source File : "+test_code_file,"INFO")
+    DEBUG_MSG("Source File : "+used_file,"INFO")
     DEBUG_MSG("Total lines : "+str(len(lines)),"INFO")
 
     # Launch lexical analyze
@@ -111,7 +112,11 @@ if __name__ == "__main__":
             DEBUG_MSG("LOG SAVE : ON.","INFO")
 
         elif arg != sys.argv[0] :
-            print "[WARN] ~ Unknow console parameter : "+arg
+            if os.path.isfile(arg) :
+                DEBUG_MSG("Use an external file : "+arg,"INFO")
+                change_src_file(arg)
+            else :
+                print "[WARN] ~ Unknow console parameter : "+arg
 
     # Main process
     main()
