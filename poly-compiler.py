@@ -48,9 +48,21 @@ def main():
 
     # Read source file (to apply the compilation)
     used_file = used_src_file()
+    # Look for lines
     full_test_code =  open(used_file, "r")
     lines = full_test_code.readlines()
+    # Look for all content (copy)
+    save_file_content = open(used_file, "r")
+    file_content = save_file_content.read()
+
+    # Verify if the file is not empty
+    if len(lines) == 0 or len(file_content.split()) == 0 :
+        error_compilation(Token(None,0,0),"Empty file.")
+
+    # Close file
     full_test_code.close()
+    save_file_content.close()
+
     DEBUG_MSG("Source File : "+used_file,"INFO")
     DEBUG_MSG("Total lines : "+str(len(lines)),"INFO")
 
@@ -75,14 +87,15 @@ def main():
     DEBUG_MSG("Tree built.","TREE")
     DEBUG_MSG("\n" + display_tree(racine_synthax,0))
 
+    # Evalution of the final result (work only for mathematics expression)
+    DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
+
     # Launch compilation (generation of the assemblor code)
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start compilation stage.","START")
     DEBUG_MSG(compil(racine_synthax))
     DEBUG_MSG("End of the compilation stage.","OK")
 
-    # Evalution of the final result (work only for mathematics expression)
-    DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
 
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Compilation end.","END")

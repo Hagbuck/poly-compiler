@@ -86,6 +86,7 @@ Ce compilateur propose certains paramétrages de configuration. Pour ce faire, o
 
 ## Langage de programmation (**INPUT**)
 Pour le moment le compilateur ne prend en compte que les expressions mathématiques. Il prend en compte tous les opérateurs unaires, binaires et logiques classiques. Les priorités opératoires sont respectées et les parenthèses sont autorisées.
+Seul les entiers sont manipulés. En cas de résultat normalement décimal, un entier arrondi sera donné.
 
 ### Opérateurs unaires
 - **-** ~ "moins" unaire.
@@ -116,6 +117,7 @@ Le langage assembleur est décrit dans le fichier joint nommé : ***msm_instruct
 
 # Erreur de compilation prise en compte
 Afin de prévenir certaines incohérences dans le code source compilé, des erreurs de compilation peuvent être  levées. En voici la liste :
+- ***Empty file*** ~ Le fichier utilisé est vide.
 - ***Incoherent char*** ~ Le caractère renseigné n'est pas pris en compte par le compilateur.
 - ***Double operator deteted*** ~ Un opérateur a été répété deux fois.
 - ***Operator Missing the second parameter*** ~ Un opérateur attend une expression à droite.
