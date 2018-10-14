@@ -79,6 +79,7 @@ Ce compilateur propose certains paramétrages de configuration. Pour ce faire, o
 ### Exécuter le code compilé (**Linux**)
 
 - Depuis la racine du projet, entrez la commande : ```./MSM/msm assemblor_instruct.txt ```.
+
 ***Note*** *: Le PATH renseigné dans la configuration peut être amené à changer selon la configuration.**
 
 # Description technique des langages
