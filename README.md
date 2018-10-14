@@ -11,6 +11,9 @@
       * [Lancer la compilation](#lancer-la-compilation)
       * [Option](#option)
       * [Configuration](#configuration)
+      * [Exécution du code compilé](#exécution-du-code-compilé)
+         * [Installation de l'environnement (<strong>Linux</strong>)](#installation-de-lenvironnement-linux)
+         * [Exécuter le code compilé (<strong>Linux</strong>)](#exécuter-le-code-compilé-linux)
    * [Description technique des langages](#description-technique-des-langages)
       * [Langage de programmation (<strong>INPUT</strong>)](#langage-de-programmation-input)
          * [Opérateurs unaires](#opérateurs-unaires)
@@ -18,9 +21,6 @@
       * [Opérateurs logiques](#opérateurs-logiques)
       * [Langage assembleur (<strong>OUTPUT</strong>)](#langage-assembleur-output)
    * [Erreur de compilation prise en compte](#erreur-de-compilation-prise-en-compte)
-
-<!-- Added by: kurai, at: 2018-10-14T12:38+02:00 -->
-
 <!--te-->
 
 
@@ -33,7 +33,6 @@ Un **compilateur** est le terme utilisé pour désigner un programme qui transfo
 **Poly-compiler** est un compilateur réalisé en python. Il transforme le langage de programmation respectant les propriétés décrites plus bas en langage pour [automate à pile](https://fr.wikipedia.org/wiki/Automate_%C3%A0_pile). Ce dernier respecte également des propriétés précises exposées ci-dessous.
 
 ## Caractéristique
-
 
  - **Langage utilisé** ~ Python 2.7.
  - **OS Support** ~ Linux, Windows, Mac. *(peu nécéssité l'installation de python.)*
@@ -60,7 +59,6 @@ Vous pouvez également lancer la compilation d'un fichier en ligne de commande e
 Exemple :
 ``python poly-compiler -dl /sample/my_src_file.txt``
 
-
 ## Configuration
 Ce compilateur propose certains paramétrages de configuration. Pour ce faire, ouvrez avec un éditeur de votre choix le fichier ***conf.py***. Attention cependant à ne modifier que ce qu'il y a dans le bloc **ALTERABLE VARS**.
 - ***test_code_file*** ~ Par défaut renseigné à **test_code.txt**. Modifiez le paramètre pour changer le fichier source à utiliser pour la compilation.
@@ -69,6 +67,19 @@ Ce compilateur propose certains paramétrages de configuration. Pour ce faire, o
 - ***debug_mod*** ~ Par défaut renseigné à **False**. Mettre à **True** pour forcer l'activation du mode debug dans tout les cas.
 - ***debug_mod_line*** ~ **ATTENTION**. Séparateur visuel utilisé pour le mod debug et le fichier de sauvegarde des logs. Le modifier pourrait altérer la visibilité des informations.
 - ***assemblor_file_name*** ~ Par défaut **assemblor_instruct.txt**. Modifiez le paramètre pour changer de fichier de sortie utilisé pour la compilation et contenant les instructions assembleur.
+
+## Exécution du code compilé
+
+### Installation de l'environnement (**Linux**)
+
+- Décompressez l'archive ***msm.tgz***.
+- Déplacez-vous dans le dossier décompressé.
+- Compilez le programme en entrant dans un terminal : ```gcc msm.c -o msm```
+
+### Exécuter le code compilé (**Linux**)
+
+- Depuis la racine du projet, entrez la commande : ```./MSM/msm assemblor_instruct.txt ```.
+***Note*** *: Le PATH renseigné dans la configuration peut être amené à changer selon la configuration.**
 
 # Description technique des langages
 

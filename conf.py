@@ -26,7 +26,7 @@ debug_mod = False
 debug_mod_line = "============================================"
 
 # File use to save the generated codee (Assemblor instruction)
-assemblor_file_name = "../MSM/assemblor_instruct.txt"
+assemblor_file_name = "assemblor_instruct.txt"
 
 
 # - - - - - - - - - - - - - - - - - #
