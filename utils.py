@@ -132,12 +132,22 @@ def eval_expr(node) :
         return eval_expr(node.childs[0]) - eval_expr(node.childs[1])
     elif node.type == "node_mult" :
         return eval_expr(node.childs[0]) * eval_expr(node.childs[1])
-    elif node.type == "node_div" :
-        return eval_expr(node.childs[0]) / eval_expr(node.childs[1])
     elif node.type == "node_pow" :
         return pow(eval_expr(node.childs[0]),eval_expr(node.childs[1]))
+
+    # DIVISION
+    elif node.type == "node_div" :
+        if eval_expr(node.childs[1]) != 0 :
+            return eval_expr(node.childs[0]) / eval_expr(node.childs[1])
+        else :
+            error_compilation(node.childs[1],'Division operation by zero.')
+
+    # MODULO
     elif node.type == "node_mod" :
-        return eval_expr(node.childs[0]) % eval_expr(node.childs[1])
+        if eval_expr(node.childs[1]) != 0 :
+            return eval_expr(node.childs[0]) % eval_expr(node.childs[1])
+        else :
+            error_compilation(node.childs[1],'Modulo operation by zero.')
 
     #BINAIRE LOGIC OPERATOR
     elif node.type == "node_equal" :

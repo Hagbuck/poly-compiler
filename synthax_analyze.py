@@ -67,7 +67,7 @@ def atom() :
         return N
 
     #IMPLICIT ELSE --> Incompatible token
-    error_compilation(current_toke,"Incompatible Char.")
+    error_compilation(current_toke,"Incoherent Char : Double operator deteted.")
 
 # Launch the synthax analyze with a high priority level
 def expr() :

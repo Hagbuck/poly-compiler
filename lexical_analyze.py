@@ -75,7 +75,7 @@ def lexique_analyze_line(code,num_line) :
             # Char unknow --> COMPILATION ERROR
             elif re.match(r"[a-zA-Z0-9_]*",word) == False or word == "" :
                 # Take only expression with number, char and underscore
-                error_compilation(Token("ERR",num_line,i+1),"Incorrect char detected : "+code[i + rank]+".")
+                error_compilation(Token("ERR",num_line,i+1),"Incoherent char detected : "+code[i + rank]+".")
 
             # Is a identifier
             else :

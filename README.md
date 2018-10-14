@@ -1,6 +1,31 @@
 # Poly-compiler
 ## *~ A python compiler*
 
+
+<!--ts-->
+   * [Poly-compiler](#poly-compiler)
+      * [*~ A python compiler*](#-a-python-compiler)
+   * [Description](#description)
+      * [Un peu de vocabulaire..](#un-peu-de-vocabulaire)
+      * [Le projet](#le-projet)
+      * [Caractéristique](#caractéristique)
+   * [Utilisation](#utilisation)
+      * [Lancer la compilation](#lancer-la-compilation)
+      * [Option](#option)
+      * [Configuration](#configuration)
+   * [Description technique des langages](#description-technique-des-langages)
+      * [Langage de programmation (<strong>INPUT</strong>)](#langage-de-programmation-input)
+         * [Opérateurs unaires](#opérateurs-unaires)
+         * [Opérateurs binaires](#opérateurs-binaires)
+      * [Opérateurs logiques](#opérateurs-logiques)
+      * [Langage assembleur (<strong>OUTPUT</strong>)](#langage-assembleur-output)
+   * [Erreur de compilation prise en compte](#erreur-de-compilation-prise-en-compte)
+
+<!-- Added by: kurai, at: 2018-10-14T12:38+02:00 -->
+
+<!--te-->
+
+
 # Description
 
 ## Un peu de vocabulaire..
@@ -73,3 +98,14 @@ Pour le moment le compilateur ne prend en compte que les expressions mathématiq
 
 ## Langage assembleur (**OUTPUT**)
 Le langage assembleur est décrit dans le fichier joint nommé : ***msm_instructs.txt***.
+
+# Erreur de compilation prise en compte
+Afin de prévenir certaines incohérences dans le code source compilé, des erreurs de compilation peuvent etre levées. En voici la liste :
+- ***Incoherent char*** ~ Le caractère renseigné n'est pas pris en compte par le compilateur.
+- ***Double operator deteted*** ~ Un opérateur a été répété deux fois.
+- ***Operator Missing the second parameter*** ~ Un opérateur attend un expression à droite.
+- ***Parenthesis missing*** ~ Une paranthèse fermante manque à l'expression.
+- ***Constant or identifiant repetition without operator*** ~ Deux variables ou deux constantes ont été détécté sans opérateur séparateur.
+
+
+***Note*** *: Dans le cas où vous en trouverez davantage, n'hésitez pas à ouvrir une issue sur notre GitHub. Merci*
