@@ -1,12 +1,10 @@
 # Poly-compiler
-## *~ A python compiler*
+## *\~ A python compiler*
 
 
 <!--ts-->
-   * [Poly-compiler](#poly-compiler)
-      * [*~ A python compiler*](#-a-python-compiler)
    * [Description](#description)
-      * [Un peu de vocabulaire..](#un-peu-de-vocabulaire)
+      * [Un peu de vocabulaire.](#un-peu-de-vocabulaire)
       * [Le projet](#le-projet)
       * [Caractéristique](#caractéristique)
    * [Utilisation](#utilisation)
@@ -28,9 +26,8 @@
 
 # Description
 
-## Un peu de vocabulaire..
-Un **compilateur** est le terme utilisé pour désigner un programme qui transforme un code source écrit dans un langage de programmation en un autre langage informatique.
-*~ Source : [Wikipédia](https://fr.wikipedia.org/wiki/Compilateur).*
+## Un peu de vocabulaire.
+Un **compilateur** est le terme utilisé pour désigner un programme qui transforme un code source écrit dans un langage de programmation en un autre langage informatique. *\~ Source : [Wikipédia](https://fr.wikipedia.org/wiki/Compilateur).*
 
 ## Le projet
 **Poly-compiler** est un compilateur réalisé en python. Il transforme le langage de programmation respectant les propriétés décrites plus bas en langage pour [automate à pile](https://fr.wikipedia.org/wiki/Automate_%C3%A0_pile). Ce dernier respecte également des propriétés précises exposées ci-dessous.
@@ -47,16 +44,16 @@ Un **compilateur** est le terme utilisé pour désigner un programme qui transfo
 
 ## Lancer la compilation
 - Avec un éditeur de texte de votre choix, éditez le fichier "***test_code.txt***".
-- Mettez-vous dans le répertoire du projet et entrez "*python poly-compiler.py*".
+- Déplacez-vous dans le répertoire du projet et entrez "***python poly-compiler.py***".
 
 ## Option
-À la suite de la commande citée plus haut, vous pouvez rajouter deux paramètres :
+À la suite de la commande d'exécution du compilateur, vous pouvez rajouter deux paramètres :
 - ***-d*** ~ Active le mode débug. Cette action permet l'affichage de toutes les étapes en détails effectuées durant la compilation.
 - ***-l*** ~ Active la sauvegarde de log. Les actions effectuées durant la compilation seront enregistré dans un fichier (par défaut ***compil.log***) vous permettant ainsi de les analyser si besoin.
 
 Ces paramètres :
 - Sont **insensibles** à la case.
-- Peuvent être mis dans n’importe quel ordre et même concaténés (ex : ***-dl***).
+- Peuvent être mis dans n’importe quel ordre et même concaténés (ex : ***-dL***).
 
 Vous pouvez également lancer la compilation d'un fichier en ligne de commande en renseignant directement le **PATH** associé en paramètre.
 
@@ -105,12 +102,12 @@ Pour le moment le compilateur ne prend en compte que les expressions mathématiq
 Le langage assembleur est décrit dans le fichier joint nommé : ***msm_instructs.txt***.
 
 # Erreur de compilation prise en compte
-Afin de prévenir certaines incohérences dans le code source compilé, des erreurs de compilation peuvent etre levées. En voici la liste :
+Afin de prévenir certaines incohérences dans le code source compilé, des erreurs de compilation peuvent être  levées. En voici la liste :
 - ***Incoherent char*** ~ Le caractère renseigné n'est pas pris en compte par le compilateur.
 - ***Double operator deteted*** ~ Un opérateur a été répété deux fois.
-- ***Operator Missing the second parameter*** ~ Un opérateur attend un expression à droite.
-- ***Parenthesis missing*** ~ Une paranthèse fermante manque à l'expression.
+- ***Operator Missing the second parameter*** ~ Un opérateur attend une expression à droite.
+- ***Parenthesis missing*** ~ Une parenthèse fermante manque à l'expression.
 - ***Constant or identifiant repetition without operator*** ~ Deux variables ou deux constantes ont été détécté sans opérateur séparateur.
 
 
-***Note*** *: Dans le cas où vous en trouverez davantage, n'hésitez pas à ouvrir une issue sur notre GitHub. Merci*
+***Note*** *: Dans le cas où vous en trouverez davantage, n'hésitez pas à ouvrir une [issue](https://github.com/Hagbuck/poly-compiler/issues) sur notre GitHub. Merci*
