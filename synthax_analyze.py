@@ -26,7 +26,15 @@ from utils import *
 
 # Launch synthax analyze
 def synthax_analyse() :
-    return expr()
+    P = Node("Prog")
+
+    global index_tab
+
+    while index_tab < len(tab_token):
+        N = statment()
+        P.add_child(N)
+
+    return P
 
 # Return a tree compose by cons/id & unaire operator
 def atom() :
@@ -121,3 +129,28 @@ def expr_launch(priority) :
                 current_toke = tab_token[index_tab]
 
     return A
+
+def statment():
+    global index_tab
+
+    if tab_token[index_tab].token == "toke_var":
+        accept("toke_var")
+        accept("toke_id")
+        accept("toke_semicolon")
+
+    else :
+        A = expr()
+        accept("toke_semicolon")
+        D = Node("drop")
+        D.add_child(A)
+        return D
+
+def accept(token_waiting)
+    global index_tab
+
+    current_toke = tab_token[index_tab + 1]
+
+    if token_waiting == current_toke.token:
+        index_tab = index_tab + 1
+    else 
+        error_compilation(current_toke,"Token not excepted")
