@@ -88,12 +88,12 @@ def main():
     DEBUG_MSG("\n" + display_tree(racine_synthax,0))
 
     # Evalution of the final result (work only for mathematics expression)
-    DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
+    #DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
 
     # Launch compilation (generation of the assemblor code)
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start compilation stage.","START")
-    DEBUG_MSG(compil(racine_synthax))
+    #DEBUG_MSG(compil(racine_synthax))
     DEBUG_MSG("End of the compilation stage.","OK")
 
 

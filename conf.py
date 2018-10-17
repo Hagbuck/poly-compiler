@@ -114,7 +114,10 @@ binaire_operator = {
 
 # "AND" & "OR" operators
 "toke_and" : { "type_node" : "node_and" , "priority" : 5 , "associativity" : 0},
-"toke_or" : { "type_node" : "node_or" , "priority" : 6 , "associativity" : 0}
+"toke_or" : { "type_node" : "node_or" , "priority" : 6 , "associativity" : 0},
+
+# OTHER
+"toke_assign" : {"type_node" : "node_assign", "priority" : 7 , "associativity" : 1}
 }
 
 

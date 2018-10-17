@@ -22,8 +22,27 @@ from utils import *
 # - - - - - - - - - - - - - - - - - #
 #           CLASS : Node            #
 # - - - - - - - - - - - - - - - - - #
-# For const and identifier
-class Node :
+class Node() :
+
+    def __init__(self,type) :
+        self.type = type
+        self.val = None
+        self.childs = []
+        self.nbChild = 0
+
+    #Add a child
+    def add_child(self,child) :
+        self.childs.append(child)
+        self.nbChild = self.nbChild + 1
+
+    # Display method
+    def __str__(self) :
+        return "["+self.type+"] ~ "+str(self.val)+"  ~ "+str(self.nbChild)+" child(s)"
+
+
+
+# For node to token
+class NodeToken(Node) :
     # Constructor
     def __init__(self,token) :
         self.type = getTypeForLeave(token.token)
@@ -42,11 +61,11 @@ class Node :
 #        CLASS : NodeUnaire         #
 # - - - - - - - - - - - - - - - - - #
 # For unaire operator  : contain one child.
-class NodeUnaire(Node) :
+class NodeUnaire(NodeToken) :
 
     def __init__(self,token,child):
         # inherit def
-        Node.__init__(self,token)
+        NodeToken.__init__(self,token)
         # others declarations
         self.type = getUnaireId(token.token)
         self.childs.append(child)
@@ -56,22 +75,26 @@ class NodeUnaire(Node) :
 #         CLASS : BasicNode         #
 # - - - - - - - - - - - - - - - - - #
 # For all the others node : contain at least two childs.
-class BasicNode(Node) :
+class BasicNode(NodeToken) :
 
     def __init__(self,token,child1,child2) :
         #inherit def
-        Node.__init__(self,token)
+        NodeToken.__init__(self,token)
         # others declarations
         self.type =  getType(token.token)
         self.childs.append(child1)
         self.childs.append(child2)
         self.nbChild = 2
 
-    #Add a child
-    def add_child(self,child) :
-        self.childs.append(child)
-        self.nbChild = self.nbChild + 1
 
+class NodeVarRef(NodeToken) :
+
+    def __init__(self,token,idx = 0) :
+        #inherit def
+        NodeToken.__init__(self,token)
+        self.type = "node_varRef"
+        self.idx = idx
+        self.nbChild = 0
 
 # - - - - - - - - - - - - - - - - - #
 #           FUNCTIONS               #
@@ -110,5 +133,5 @@ def display_tree(node,level) :
     if node != None :
         for child in node.childs :
             # Add string child in string racien
-            return_str += display_tree(child,level + 1) 
+            return_str += display_tree(child,level + 1)
     return return_str

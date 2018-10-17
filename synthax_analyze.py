@@ -26,14 +26,12 @@ from utils import *
 
 # Launch synthax analyze
 def synthax_analyse() :
-    P = Node("Prog")
-
     global index_tab
 
+    P = Node("Prog")
     while index_tab < len(tab_token):
         N = statment()
         P.add_child(N)
-
     return P
 
 # Return a tree compose by cons/id & unaire operator
@@ -53,10 +51,15 @@ def atom() :
         current_node = atom()
         return NodeUnaire(current_toke,current_node)
 
-    #CONST & ID TOKEN
-    elif current_toke.token == "toke_const" or current_toke.token == "toke_id" :
+    #CONST
+    elif current_toke.token == "toke_const" :
         index_tab = index_tab + 1
-        return Node(current_toke)
+        return NodeToken(current_toke)
+
+    #IDENT
+    elif current_toke.token == "toke_id" :
+        index_tab = index_tab + 1
+        return NodeVarRef(current_toke)
 
     #PARANTHESE
     elif current_toke.token == "toke_parantOpen" :
@@ -145,12 +148,12 @@ def statment():
         D.add_child(A)
         return D
 
-def accept(token_waiting)
+def accept(token_waiting) :
     global index_tab
 
-    current_toke = tab_token[index_tab + 1]
+    current_toke = tab_token[index_tab]
 
-    if token_waiting == current_toke.token:
+    if token_waiting == current_toke.token :
         index_tab = index_tab + 1
-    else 
+    else :
         error_compilation(current_toke,"Token not excepted")
