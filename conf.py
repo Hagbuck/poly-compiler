@@ -80,7 +80,8 @@ hashmap_toke = {
 "true" : "toke_true",
 "false" : "toke_false",
 "and" : "toke_and",
-"or" : "toke_or"
+"or" : "toke_or",
+"var" : "toke_var"
 }
 
 
