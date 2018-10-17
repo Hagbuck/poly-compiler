@@ -24,9 +24,9 @@ from utils import *
 # - - - - - - - - - - - - - - - - - #
 class Node() :
 
-    def __init__(self,type) :
+    def __init__(self,type,val = None) :
         self.type = type
-        self.val = None
+        self.val = val
         self.childs = []
         self.nbChild = 0
 

@@ -28,11 +28,15 @@ from utils import *
 def synthax_analyse() :
     global index_tab
 
-    P = Node("Prog")
+    # Main node (racine)
+    P = Node("prog")
+
+    # Parcour all token tab
     while index_tab < len(tab_token):
-        N = statment()
+        N = get_statment()
         P.add_child(N)
     return P
+
 
 # Return a tree compose by cons/id & unaire operator
 def atom() :
@@ -133,14 +137,19 @@ def expr_launch(priority) :
 
     return A
 
-def statment():
+# Find a statment model and build it
+def get_statment():
     global index_tab
 
+    # Declaration (ex : y = 5)
     if tab_token[index_tab].token == "toke_var":
         accept("toke_var")
-        accept("toke_id")
+        cpy_toke_id = accept("toke_id")
         accept("toke_semicolon")
+        node_dcl = Node("node_dcl",cpy_toke_id.val)
+        return node_dcl
 
+    # Default expression + ";"
     else :
         A = expr()
         accept("toke_semicolon")
@@ -151,9 +160,14 @@ def statment():
 def accept(token_waiting) :
     global index_tab
 
+    if index_tab >= len(tab_token):
+        error_compilation(tab_token[-1],"Missing semicolon.")
+
     current_toke = tab_token[index_tab]
 
     if token_waiting == current_toke.token :
         index_tab = index_tab + 1
+        return current_toke
+
     else :
-        error_compilation(current_toke,"Token not excepted")
+        error_compilation(current_toke,"Token not excepted.")
