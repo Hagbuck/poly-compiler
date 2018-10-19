@@ -153,7 +153,7 @@ def get_statment():
     else :
         A = expr()
         accept("toke_semicolon")
-        D = Node("drop")
+        D = Node("node_drop")
         D.add_child(A)
         return D
 

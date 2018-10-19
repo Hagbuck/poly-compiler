@@ -27,13 +27,21 @@ from utils import *
 def genCode(N) :
 
     str_code = ""
+
+    if N.type == "prog" :
+        str_code += "push.i 0\n"
+        write_assemblor_file("push.i 0")
+        for statment in N.childs :
+            str_code += genCode(statment)
+        return str_code
+
     # CONST
-    if N.type == "node_const" :
+    elif N.type == "node_const" :
         write_assemblor_file("push.i "+str(N.val))
         return "push.i "+str(N.val) + "\n"
 
     # POW
-    if N.type == "node_pow" :
+    elif N.type == "node_pow" :
         # Eval right child
         n = eval_expr(N.childs[1])
         # Build expression pow
@@ -66,6 +74,30 @@ def genCode(N) :
         str_code = genCode(N.childs[0])
         write_assemblor_file("not")
         return str_code + "not" + "\n"
+
+    # DROP (End of a statment)
+    elif N.type == "node_drop" :
+        str_code = genCode(N.childs[0])
+        write_assemblor_file("drop")
+        return str_code + "drop\n"
+
+    # REFERENCE to a variable
+    elif N.type == "node_varRef" :
+        str_code = "get "+str(N.idx)+"\n"
+        write_assemblor_file(str_code)
+        return str_code
+
+    # ASSIGNATION
+    elif N.type == "node_assign" :
+        str_code = genCode(N.childs[1])
+        write_assemblor_file("dup")
+        write_assemblor_file("set " + str(N.childs[0].idx))
+        str_code += "dup\nset "+str(N.childs[0].idx)+"\n"
+        return str_code
+
+    # DEFINITION
+    elif N.type =="node_dcl" :
+        return str_code
 
     # OTHER TYPE (Ignore node and go to childs)
     else :

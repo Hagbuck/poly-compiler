@@ -93,7 +93,7 @@ def main():
     # Launch compilation (generation of the assemblor code)
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start compilation stage.","START")
-    #DEBUG_MSG(compil(racine_synthax))
+    DEBUG_MSG(compil(racine_synthax))
     DEBUG_MSG("End of the compilation stage.","OK")
 
 
