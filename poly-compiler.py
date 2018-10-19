@@ -21,6 +21,7 @@ from node import *
 from token import *
 from lexical_analyze import *
 from synthax_analyze import *
+from sem_analyze import *
 from code_generator import *
 
 # SYSTEM MODULES
@@ -83,6 +84,13 @@ def main():
     racine_synthax = synthax_analyse()
     DEBUG_MSG("End of the synthax analyse.","OK")
     # Display the tree generate
+
+    DEBUG_MSG("Tree built.","TREE")
+    DEBUG_MSG("\n" + display_tree(racine_synthax,0))
+
+    DEBUG_MSG("Start semantic analyze.", "START")
+    semantic_analyze(racine_synthax)
+    DEBUG_MSG("End of the semantic analyze", "OK")
 
     DEBUG_MSG("Tree built.","TREE")
     DEBUG_MSG("\n" + display_tree(racine_synthax,0))

@@ -29,6 +29,7 @@ class Node() :
         self.val = val
         self.childs = []
         self.nbChild = 0
+        self.slot = None
 
     #Add a child
     def add_child(self,child) :
@@ -51,6 +52,7 @@ class NodeToken(Node) :
         self.col = token.col
         self.childs = []
         self.nbChild = 0
+        self.slot = None
 
     # Display method
     def __str__(self) :
@@ -95,6 +97,10 @@ class NodeVarRef(NodeToken) :
         self.type = "node_varRef"
         self.idx = idx
         self.nbChild = 0
+
+    # Display method
+    def __str__(self) :
+        return "["+self.type+"] ~ "+str(self.val)+" ~ ("+str(self.line)+";"+str(self.col)+") ~ "+str(self.slot) + " slot"
 
 # - - - - - - - - - - - - - - - - - #
 #           FUNCTIONS               #
