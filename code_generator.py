@@ -119,8 +119,8 @@ def genCode(N) :
             write_assemblor_file("jumpf l" + str(L1))   # jumpf L1
             str_code += "jumpf l" + str(L1) + "\n"
             str_code += genCode(N.childs[1])            # <body1>
-            write_assemblor_file("jump " + str(L2))     # jump L2
-            str_code += "jump " + str(L2) + "\n"
+            write_assemblor_file("jump l" + str(L2))     # jump L2
+            str_code += "jump l" + str(L2) + "\n"
             write_assemblor_file(".l" + str(L1))        # .L1
             str_code += ".l" + str(L1) + "\n"
             str_code += genCode(N.childs[2])            # <body2>
