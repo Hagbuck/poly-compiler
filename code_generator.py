@@ -33,7 +33,7 @@ def genCode(N) :
     str_code = ""
 
     if N.type == "prog" :
-        print "NUMBER OF SLOTS : " + str(conf.nb_slot)
+        DEBUG_MSG("NUMBER OF SLOTS : " + str(conf.nb_slot),"INFO") 
         for i in range(0, conf.nb_slot):
             str_code += "push.i 0\n"
             write_assemblor_file("push.i 0")

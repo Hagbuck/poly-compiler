@@ -100,7 +100,7 @@ class NodeVarRef(NodeToken) :
 
     # Display method
     def __str__(self) :
-        return "["+self.type+"] ~ "+str(self.val)+" ~ ("+str(self.line)+";"+str(self.col)+") ~ "+str(self.slot) + " slot"
+        return "["+self.type+"] ~ "+str(self.val)+" ~ ("+str(self.line)+";"+str(self.col)+") ~ slot #"+str(self.slot)
 
 # - - - - - - - - - - - - - - - - - #
 #           FUNCTIONS               #

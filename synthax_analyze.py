@@ -141,7 +141,7 @@ def expr_launch(priority) :
 def get_statment():
     global index_tab
 
-    # Declaration (ex : y = 5)
+    # Declaration (ex : var x;)
     if tab_token[index_tab].token == "toke_var":
         accept("toke_var")
         cpy_toke_id = accept("toke_id")
@@ -254,4 +254,4 @@ def accept(token_waiting) :
         return current_toke
 
     else :
-        error_compilation(current_toke,"Token not excepted.")
+        error_compilation(current_toke,"Token not excepted. '"+token_waiting+"' waiting.")
