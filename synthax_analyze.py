@@ -149,6 +149,46 @@ def get_statment():
         node_dcl = Node("node_dcl",cpy_toke_id.val)
         return node_dcl
 
+    # Begining a block section
+    elif tab_token[index_tab].token == "toke_braceOpen" :
+        N = Node("node_block")
+        accept("toke_braceOpen")
+        while tab_token[index_tab].token != "toke_braceClose" :
+            N.add_child(get_statment())
+        accept("toke_braceClose")
+        return N
+
+    # If (and else)
+    elif tab_token[index_tab].token == "toke_if" :
+        accept("toke_if")
+        accept("toke_parantOpen")
+        T = expr()
+        accept("toke_parantClose")
+        B = get_statment()
+        N = Node("node_cond")
+        N.add_child(T)
+        N.add_child(B)
+        if index_tab < len(tab_token) and tab_token[index_tab].token == "toke_else" :
+            #index_tab = index +1
+            accept("toke_else")
+            N.add_child(get_statment())
+        return N
+
+    # While
+    elif tab_token[index_tab].token == "toke_while" :
+        N = Node("node_loop")
+        accept("toke_while")
+        accept("toke_parantOpen")
+        T = expr()
+        accept("toke_parantClose")
+        B = get_statment()
+        N_cond = Node("node_cond")
+        N_cond.add_child(T)
+        N_cond.add_child(B)
+        N_cond.add_child(Node("node_break"))
+        N.add_child(N_cond)
+        return N
+
     # Default expression + ";"
     else :
         A = expr()
