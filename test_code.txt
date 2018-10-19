@@ -1,8 +1,7 @@
-var x;
-x = 0;
-var y;
-y =3;
-while(x > 10)
+var x;var i;
+x = 1;
+
+for(i = 0;i<=10;i=i+1)
 {
-  x = x +y;
+  x = x * i;
 }

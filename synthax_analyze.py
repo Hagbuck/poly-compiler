@@ -189,6 +189,44 @@ def get_statment():
         N.add_child(N_cond)
         return N
 
+    # For
+    elif tab_token[index_tab].token == "toke_for" :
+        # Main node
+        main_node = Node("node_seq")
+        # Gramar
+        accept("toke_for")
+        accept("toke_parantOpen")
+        init = expr()
+        accept("toke_semicolon")
+        test = expr()
+        accept("toke_semicolon")
+        step = expr()
+        accept("toke_parantClose")
+        B = get_statment()
+
+        # body & step
+        seq_node = Node("seq")
+        seq_node.add_child(B)
+        seq_node.add_child(step)
+
+        # Test / sequence & break
+        cond_node = Node("node_cond")
+        cond_node.add_child(test)
+        cond_node.add_child(seq_node)
+        cond_node.add_child(Node("node_break"))
+
+        # Loop (encaps cond node)
+        loop_node = Node("node_loop")
+        loop_node.add_child(cond_node)
+
+        # Add in main_node
+        main_node.add_child(init)
+        main_node.add_child(loop_node)
+
+        return main_node
+
+
+
     # Default expression + ";"
     else :
         A = expr()

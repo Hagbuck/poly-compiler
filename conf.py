@@ -76,6 +76,7 @@ hashmap_toke = {
 "else" : "toke_else",
 "elif" : "toke_elif",
 "while" : "toke_while",
+"for" : "toke_for",
 "return" : "toke_return",
 "true" : "toke_true",
 "false" : "toke_false",
