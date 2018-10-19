@@ -41,6 +41,9 @@ tab_token = []
 # Sharing index in order to browse the tab
 index_tab = 0
 
+# Sharing the number of slot for the variable allocation
+nb_slot = 0
+
 # Dictionnary with all the keyword of our langage
 # A particular symbol is associate with a token id
 # symbol --> token

@@ -23,7 +23,6 @@ from symbol import *
 #           FUNCTIONS               #
 # - - - - - - - - - - - - - - - - - #
 
-nb_slot = 0
 stack = [{}]
 
 # Main function for the semantic analyse

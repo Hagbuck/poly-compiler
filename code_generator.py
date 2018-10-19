@@ -29,14 +29,16 @@ nb_label = 0
 def genCode(N) :
 
     global nb_label
+    global nb_slot
 
     str_code = ""
 
     if N.type == "prog" :
-        str_code += "push.i 0\n"
-        write_assemblor_file("push.i 0")
+        for i in range(0, nb_slot + 1):
+            str_code += "push.i 0\n"
+            write_assemblor_file("push.i 0")
         for statment in N.childs :
-            str_code += genCode(statment)
+            str_code += str(genCode(statment))
         return str_code
 
     # CONST
@@ -105,6 +107,7 @@ def genCode(N) :
 
     # COND
     elif N.type == "node_cond" :
+        str_code = ""
         # 3 childs -> if else
         if N.nbChild == 3 :
             L1 = nb_label
@@ -112,22 +115,30 @@ def genCode(N) :
             L2 = nb_label
             nb_label = nb_label + 1
 
-            genCode(N.childs[0])                    # <test>
-            write_assemblor_file("jumpf l" + L1)    # jumpf L1
-            genCode(N.childs[1])                    # <body1>
-            write_assemblor_file("jump " + L2)      # jump L2
-            write_assemblor_file(".l" + L1)         # .L1
-            genCode(n.childs[2])                    # <body2>
-            write_assemblor_file(".l" + L2)         # .L2
+            str_code += genCode(N.childs[0])            # <test>
+            write_assemblor_file("jumpf l" + str(L1))   # jumpf L1
+            str_code += "jumpf l" + str(L1) + "\n"
+            str_code += genCode(N.childs[1])            # <body1>
+            write_assemblor_file("jump " + str(L2))     # jump L2
+            str_code += "jump " + str(L2) + "\n"
+            write_assemblor_file(".l" + str(L1))        # .L1
+            str_code += ".l" + str(L1) + "\n"
+            str_code += genCode(N.childs[2])            # <body2>
+            write_assemblor_file(".l" + str(L2))        # .L2
+            str_code += ".l" + str(L2) + "\n"
 
         else : # simple if
             L = nb_label
             nb_label = nb_label + 1
 
-            genCode(N.childs[0])                    # <test>
-            write_assemblor_file("jump.f l" + L)    # jumpf L
-            genCode(N.childs[1])                    # <body>
-            write_assemblor_file(".l" + L)          # .L
+            str_code += genCode(N.childs[0])            # <test>
+            write_assemblor_file("jumpf l" + str(L))   # jumpf L
+            str_code += "jumpf l" + str(L) + "\n"
+            str_code += genCode(N.childs[1])            # <body>
+            write_assemblor_file(".l" + str(L))         # .L
+            str_code += ".l" + str(L) + "\n"
+
+        return str_code
 
     # OTHER TYPE (Ignore node and go to childs)
     else :
