@@ -4,5 +4,5 @@ var y;
 y = 3;
 if(x > y)
 {
-  x = x + y;
+    y = 1;
 }

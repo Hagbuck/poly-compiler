@@ -15,7 +15,7 @@
 # - - - - - - - - - - - - - - - - - #
 
 # PROJECT MODULES
-from conf import *
+import conf
 from token import *
 from utils import *
 
@@ -29,12 +29,12 @@ nb_label = 0
 def genCode(N) :
 
     global nb_label
-    global nb_slot
 
     str_code = ""
 
     if N.type == "prog" :
-        for i in range(0, nb_slot + 1):
+        print "NUMBER OF SLOTS : " + str(conf.nb_slot)
+        for i in range(0, conf.nb_slot):
             str_code += "push.i 0\n"
             write_assemblor_file("push.i 0")
         for statment in N.childs :

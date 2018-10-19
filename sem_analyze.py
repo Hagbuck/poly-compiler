@@ -15,7 +15,7 @@
 # - - - - - - - - - - - - - - - - - #
 #
 #PERSONNAL MODULE
-from conf import *
+import conf
 from utils import *
 from symbol import *
 
@@ -28,13 +28,11 @@ stack = [{}]
 # Main function for the semantic analyse
 def semantic_analyze(node):
 
-    global nb_slot
-
     if node.type == "node_dcl":
         S = new_symbol(node.val);
         
-        S.slot = nb_slot
-        nb_slot = nb_slot + 1
+        S.slot = conf.nb_slot
+        conf.nb_slot = conf.nb_slot + 1
 
     elif node.type == "node_varRef":
         S = search_symbol(node.val)
