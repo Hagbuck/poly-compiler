@@ -166,7 +166,14 @@ def compil(N) :
     # Generation
     main_code = "\n" + genCode(N)
     # Display result and finsh the generation
-    write_assemblor_file("out.i")
+    for i in range(0, conf.nb_slot):
+        write_assemblor_file("push.i 62")
+        write_assemblor_file("out.c")
+
+        write_assemblor_file("out.i")
+        
+        write_assemblor_file("push.i 10")
+        write_assemblor_file("out.c")
     write_assemblor_file("push.i 10")
     write_assemblor_file("out.c")
     return main_code
