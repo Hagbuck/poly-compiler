@@ -1,14 +1,27 @@
-# - * - * - * - * - * - * - * #
-#           IMPORT            #
-# - * - * - * - * - * - * - * #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                           Project : Compilateur (Python)                    #
+#                                                                             #
+#                                File : sem_analyse.py                        #
+#                                                                             #
+#             Description : Semantique analyze file and functions             #
+#                                                                             #
+#                Contributors : Corentin TROADEC & Anthony Vuillemin          #
+#                                                                             #
+#                               Date : September 2018                         #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
+# - - - - - - - - - - - - - - - - - #
+#             IMPORT                #
+# - - - - - - - - - - - - - - - - - #
+#
 #PERSONNAL MODULE
 from conf import *
 from utils import *
 from symbol import *
 
-# - * - * - * - * - * - * - * #
-#         FUNCTIONS           #
-# - * - * - * - * - * - * - * #
+# - - - - - - - - - - - - - - - - - #
+#           FUNCTIONS               #
+# - - - - - - - - - - - - - - - - - #
 
 # Main function for the semantic analyse
 # TODO 
