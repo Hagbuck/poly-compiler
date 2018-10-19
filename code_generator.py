@@ -167,13 +167,16 @@ def compil(N) :
     main_code = "\n" + genCode(N)
     # Display result and finsh the generation
     for i in range(0, conf.nb_slot):
+        # Display '> '
+        write_assemblor_file("push.i 32")
         write_assemblor_file("push.i 62")
         write_assemblor_file("out.c")
+        write_assemblor_file("out.c")
 
+        # Display variable value
         write_assemblor_file("out.i")
         
+        # Dispaly '\n'
         write_assemblor_file("push.i 10")
         write_assemblor_file("out.c")
-    write_assemblor_file("push.i 10")
-    write_assemblor_file("out.c")
     return main_code
