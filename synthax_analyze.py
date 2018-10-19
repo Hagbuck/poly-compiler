@@ -225,6 +225,12 @@ def get_statment():
 
         return main_node
 
+    # Print
+    if tab_token[index_tab].token == "toke_print" :
+        N = Node("node_print")
+        accept("toke_print")
+        N.add_child(get_statment())
+        return N
 
 
     # Default expression + ";"

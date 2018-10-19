@@ -140,6 +140,19 @@ def genCode(N) :
 
         return str_code
 
+    # print
+    if N.type == "node_print" :
+        genCode(N.childs[0].childs[0])
+        #node_ref = N.childs[0].childs[0
+        #str_code += "get "+str(node_ref.slot)+"\n"
+        str_code += "out.i\n"
+        #write_assemblor_file("get "+str(node_ref.slot)+"\n")
+        write_assemblor_file("out.i")
+        # Dispaly '\n'
+        write_assemblor_file("push.i 10")
+        write_assemblor_file("out.c")
+        return str_code
+
     # OTHER TYPE (Ignore node and go to childs)
     else :
         DEBUG_MSG("Ignore node : "+str(N),"WARN")
@@ -174,8 +187,8 @@ def compil(N) :
         write_assemblor_file("out.c")
 
         # Display variable value
-        write_assemblor_file("out.i")
-        
+        #write_assemblor_file("out.i")
+
         # Dispaly '\n'
         write_assemblor_file("push.i 10")
         write_assemblor_file("out.c")
