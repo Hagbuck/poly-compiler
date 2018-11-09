@@ -1,12 +1,15 @@
-toto(x,y){
-var re;
-re = x * y;
-return re;}
+toto(x){
+  if(x > 0){
+  print(x);
+    return x + toto(x - 1);
+  }
+}
 
 
 main()
 {
  var a;
- a = toto(a ,4+2) + 2;
+ a = toto(5);
+ print(a);
  return a;
 }

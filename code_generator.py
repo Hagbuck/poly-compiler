@@ -16,6 +16,7 @@
 
 # PROJECT MODULES
 import conf
+from sem_analyze import *
 from token import *
 from utils import *
 
@@ -32,13 +33,47 @@ def genCode(N) :
 
     str_code = ""
 
+    # MAIN NODE (prog)
     if N.type == "prog" :
-        DEBUG_MSG("NUMBER OF SLOTS : " + str(conf.nb_slot),"INFO") 
-        for i in range(0, conf.nb_slot):
+        #DEBUG_MSG("NUMBER OF SLOTS : " + str(conf.nb_slot),"INFO")
+        #for i in range(0, conf.nb_slot):
+        #    str_code += "push.i 0\n"
+        #    write_assemblor_file("push.i 0")
+
+        for functions in N.childs :
+            str_code += str(genCode(functions))
+        return str_code
+
+
+    if N.type == "funct" :
+        str_code += "." + N.val + "\n"
+        write_assemblor_file("." + N.val)
+        S = search_symbol(N.val)
+
+        for i in range(0,S.nb_slot) :
             str_code += "push.i 0\n"
             write_assemblor_file("push.i 0")
-        for statment in N.childs :
-            str_code += str(genCode(statment))
+
+        str_code += genCode(N.childs[-1])
+        str_code += 'push.i 0\nret\n'
+        write_assemblor_file("push.i 0\nret")
+        return str_code
+
+
+    if N.type == "funct_ref" :
+        str_code += "prep "+N.val+"\n"
+        write_assemblor_file("prep "+N.val)
+        for ch in N.childs :
+            str_code += genCode(ch)
+        str_code += "call "+str(N.nbChild)+"\n"
+        write_assemblor_file("call "+str(N.nbChild))
+        return str_code
+
+    # Return
+    if N.type == "return" :
+        str_code += genCode(N.childs[0]) + "\n"
+        str_code += "ret\n"
+        write_assemblor_file("ret")
         return str_code
 
     # CONST
@@ -156,7 +191,8 @@ def genCode(N) :
     # OTHER TYPE (Ignore node and go to childs)
     else :
         DEBUG_MSG("Ignore node : "+str(N),"WARN")
-        str_code += genCode(N.childs[0]) + "\n"
+        for i in range(0,N.nbChild) :
+            str_code += genCode(N.childs[i]) + "\n"
         return str_code
 
 # pow function for assemblor
@@ -175,21 +211,8 @@ def pow_compil(n,N) :
 # Code generator (assemblor instrutions) launch
 def compil(N) :
     # Start
-    write_assemblor_file(".start")
+    write_assemblor_file(".start\nprep main\ncall 0\nhalt")
+    main_code = ".start\nprep main\ncall 0\nhalt\n"
     # Generation
-    main_code = "\n" + genCode(N)
-    # Display result and finsh the generation
-    for i in range(0, conf.nb_slot):
-        # Display '> '
-        write_assemblor_file("push.i 32")
-        write_assemblor_file("push.i 62")
-        write_assemblor_file("out.c")
-        write_assemblor_file("out.c")
-
-        # Display variable value
-        #write_assemblor_file("out.i")
-
-        # Dispaly '\n'
-        write_assemblor_file("push.i 10")
-        write_assemblor_file("out.c")
+    main_code += "\n\n" + genCode(N)
     return main_code
