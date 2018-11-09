@@ -1,11 +1,12 @@
+toto(x,y){
+var re;
+re = x * y;
+return re;}
+
+
 main()
 {
  var a;
  a = toto(a ,4+2) + 2;
  return a;
 }
-
-toto(x,y){
-var re;
-re = x * y;
-return re;}

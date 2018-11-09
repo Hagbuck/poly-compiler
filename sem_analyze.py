@@ -28,16 +28,19 @@ stack = [{}]
 # Main function for the semantic analyse
 def semantic_analyze(node):
 
+    # Variable declaration node
     if node.type == "node_dcl":
-        S = new_symbol(node.val);
+        S = new_symbol(node.val, "var");
 
         S.slot = conf.nb_slot
         conf.nb_slot = conf.nb_slot + 1
 
+    # Variable reference node
     elif node.type == "node_varRef":
         S = search_symbol(node.val)
         node.slot = S.slot
 
+    # Block node
     elif node.type == "node_block":
         begin_block()
 
@@ -45,6 +48,34 @@ def semantic_analyze(node):
             semantic_analyze(child)
 
         end_block()
+
+    # Declaration function node
+    elif node.type == "funct":
+        conf.nb_slot = 0
+        S = new_symbol(node.val, "funct")
+        S.nb_args = node.nbChild - 1
+
+        begin_block()
+
+        for child in node.childs:
+            semantic_analyze(child)
+
+        end_block()
+
+        S.nb_slot = conf.nb_slot - S.nb_args
+
+    # Call function node
+    elif node.type == "funct_ref":
+        S = search_symbol(node.val)
+
+        if S.type != "funct":
+            erreur(None, "Error : " + ident + " isn't a function.")
+
+        elif S.nb_args != node.nbChild:
+            erreur(None, "Error : " + ident + " require " + S.nb_args + " arguments.")
+
+        for child in node.childs:
+            semantic_analyze(child)
 
     else:
         for child in node.childs:
@@ -65,14 +96,14 @@ def end_block():
 
 
 # Create a new symbol into the stack
-def new_symbol(ident):
+def new_symbol(ident, type_symbol):
 
     T = stack[-1]
     if ident in T:
         error_compilation(None, "Error : " + ident + " is already defined.")
         return
 
-    S = Symbol(ident)
+    S = Symbol(ident, type_symbol)
     T[ident] = S
     return S
 
