@@ -37,7 +37,7 @@ def lexique_analyze(fullCode) :
         lexique_analyze_line(test_code,num_line)
         # Next line
         num_line = num_line + 1
-
+    tab_token.append(Token("toke_eop",0,0))
 
 # Fill the token tab
 def lexique_analyze_line(code,num_line) :

@@ -32,8 +32,10 @@ def synthax_analyse() :
     P = Node("prog")
 
     # Parcour all token tab
-    while index_tab < len(tab_token):
-        N = get_statment()
+    #while index_tab < len(tab_token):
+    while tab_token[index_tab].token != "toke_eop" :
+        #N = get_statment()
+        N = get_function()
         P.add_child(N)
     return P
 
@@ -60,10 +62,27 @@ def atom() :
         index_tab = index_tab + 1
         return NodeToken(current_toke)
 
-    #IDENT
+    #IDENT OR FUNCTION REF
     elif current_toke.token == "toke_id" :
         index_tab = index_tab + 1
-        return NodeVarRef(current_toke)
+
+        #Function reference
+        if tab_token[index_tab] != None and tab_token[index_tab].token == "toke_parantOpen" :
+            N = Node("funct_ref",current_toke.val)
+            accept("toke_parantOpen")
+            # Parameters
+            while tab_token[index_tab].token != "toke_parantClose" :
+                N.add_child(expr())
+                # evalue next expression. Virgule if not toke_parantClose
+                if tab_token[index_tab].token != "toke_parantClose" :
+                    accept("toke_virgule")
+
+            accept("toke_parantClose")
+            return N
+
+        # Just id
+        else :
+            return NodeVarRef(current_toke)
 
     #PARANTHESE
     elif current_toke.token == "toke_parantOpen" :
@@ -148,6 +167,15 @@ def get_statment():
         accept("toke_semicolon")
         node_dcl = Node("node_dcl",cpy_toke_id.val)
         return node_dcl
+
+    # Return
+    if tab_token[index_tab].token == "toke_return" :
+        accept("toke_return")
+        node_return = Node("return")
+        E = expr()
+        accept("toke_semicolon")
+        node_return.add_child(E)
+        return node_return;
 
     # Begining a block section
     elif tab_token[index_tab].token == "toke_braceOpen" :
@@ -240,6 +268,37 @@ def get_statment():
         D = Node("node_drop")
         D.add_child(A)
         return D
+
+# Return a function node
+def get_function() :
+    global index_tab
+
+    # Function name
+    if tab_token[index_tab].token != "toke_id" :
+        error_compilation( tab_token[index_tab],"Invalid name function.")
+
+    # Build node
+    N = Node("funct",tab_token[index_tab].val)
+
+    accept("toke_id") #index_tab = index_tab + 1
+    accept("toke_parantOpen")
+
+    # Parameters
+    while tab_token[index_tab].token != "toke_parantClose" :
+        # Copy toke_id
+        cpy_toke_id = tab_token[index_tab]
+        # Next & create var declaration
+        accept("toke_id")
+        N.add_child(Node("node_dcl",cpy_toke_id.val))
+        # evalue next expression. Virgule if not toke_parantClose
+        if tab_token[index_tab].token != "toke_parantClose" :
+            accept("toke_virgule")
+
+    accept("toke_parantClose")
+    # Build function node & return
+    N.add_child(get_statment())
+    return N
+
 
 def accept(token_waiting) :
     global index_tab
