@@ -8,5 +8,4 @@ main()
 toto(x,y){
 var re;
 re = x * y;
-return re;
-}
+return re;}

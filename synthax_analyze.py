@@ -66,21 +66,24 @@ def atom() :
     elif current_toke.token == "toke_id" :
         index_tab = index_tab + 1
 
-        #Function reference
+        # Function reference
         if tab_token[index_tab] != None and tab_token[index_tab].token == "toke_parantOpen" :
             N = Node("funct_ref",current_toke.val)
             accept("toke_parantOpen")
             # Parameters
             while tab_token[index_tab].token != "toke_parantClose" :
                 N.add_child(expr())
-                # evalue next expression. Virgule if not toke_parantClose
-                if tab_token[index_tab].token != "toke_parantClose" :
-                    accept("toke_virgule")
+                # eval next expression. If next = ")", end param declaration
+                if tab_token[index_tab].token == "toke_parantClose" :
+                    break;
+                # else need a virgule
+                accept("toke_virgule")
 
+            # End of function call
             accept("toke_parantClose")
             return N
 
-        # Just id
+        # Var reference
         else :
             return NodeVarRef(current_toke)
 

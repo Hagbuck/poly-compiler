@@ -30,7 +30,7 @@ def semantic_analyze(node):
 
     if node.type == "node_dcl":
         S = new_symbol(node.val);
-        
+
         S.slot = conf.nb_slot
         conf.nb_slot = conf.nb_slot + 1
 
@@ -40,7 +40,7 @@ def semantic_analyze(node):
 
     elif node.type == "node_block":
         begin_block()
-        
+
         for child in node.childs:
             semantic_analyze(child)
 
@@ -66,12 +66,12 @@ def end_block():
 
 # Create a new symbol into the stack
 def new_symbol(ident):
-    
+
     T = stack[-1]
     if ident in T:
-        error_compilation(None, "Error : " + ident + " is already defined")
+        error_compilation(None, "Error : " + ident + " is already defined.")
         return
-    
+
     S = Symbol(ident)
     T[ident] = S
     return S
@@ -80,14 +80,14 @@ def new_symbol(ident):
 # Research an ident into the stack
 def search_symbol(ident):
     i = len(stack) - 1
-    
+
     while i >= 0:
         T = stack[i]
         if ident in T:
             return T[ident]
         i -= 1
-    
-    error_compilation(None, "Error : " + ident + " is not defined")
+
+    error_compilation(None, "Error : " + ident + " is not defined.")
 
 
 # Display the stack
