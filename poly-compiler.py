@@ -72,6 +72,7 @@ def main():
     DEBUG_MSG("Start lexical analyse.","START")
     lexique_analyze(lines)
     DEBUG_MSG("End of the lexical analyse.","OK")
+    DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Token tab built.","TOKENS")
     cpt = 0
     for a_toke in tab_token :
@@ -83,31 +84,29 @@ def main():
     DEBUG_MSG("Start synthax analyse.","START")
     racine_synthax = synthax_analyse()
     DEBUG_MSG("End of the synthax analyse.","OK")
-    # Display the tree generate
 
-    DEBUG_MSG("Tree built.","TREE")
-    DEBUG_MSG("\n" + display_tree(racine_synthax,0))
-
+    DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start semantic analyze.", "START")
     semantic_analyze(racine_synthax)
     DEBUG_MSG("End of the semantic analyze", "OK")
 
     DEBUG_MSG("Tree built.","TREE")
+    DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("\n" + display_tree(racine_synthax,0))
-
-    # Evalution of the final result (work only for mathematics expression)
-    #DEBUG_MSG(str(eval_expr(racine_synthax)),"RESULT")
 
     # Launch compilation (generation of the assemblor code)
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start compilation stage.","START")
+    DEBUG_MSG(debug_mod_line)
     DEBUG_MSG(compil(racine_synthax))
+    DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("End of the compilation stage.","OK")
 
 
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Compilation end.","END")
     DEBUG_MSG("Assemblor file (relative PATH) : "+assemblor_file_name,"INFO")
+    DEBUG_MSG(debug_mod_line)
 
 
 # Execute only if run as a script

@@ -35,41 +35,43 @@ def genCode(N) :
 
     # MAIN NODE (prog)
     if N.type == "prog" :
-        #DEBUG_MSG("NUMBER OF SLOTS : " + str(conf.nb_slot),"INFO")
-        #for i in range(0, conf.nb_slot):
-        #    str_code += "push.i 0\n"
-        #    write_assemblor_file("push.i 0")
-
         for functions in N.childs :
             str_code += str(genCode(functions))
         return str_code
 
-
+    # FUNCTIONS
     if N.type == "funct" :
         str_code += "." + N.val + "\n"
         write_assemblor_file("." + N.val)
+        # Get symbol
         S = search_symbol(N.val)
 
+        # Slots reservation
         for i in range(0,S.nb_slot) :
             str_code += "push.i 0\n"
             write_assemblor_file("push.i 0")
 
+        # Gen code for last child
         str_code += genCode(N.childs[-1])
+        # end function bloc
+
         str_code += 'push.i 0\nret\n'
         write_assemblor_file("push.i 0\nret")
         return str_code
 
-
+    # FUNCTION REFERENCE
     if N.type == "funct_ref" :
         str_code += "prep "+N.val+"\n"
         write_assemblor_file("prep "+N.val)
+        # Generate childs code
         for ch in N.childs :
             str_code += genCode(ch)
+        # End block
         str_code += "call "+str(N.nbChild)+"\n"
         write_assemblor_file("call "+str(N.nbChild))
         return str_code
 
-    # Return
+    # RETURN
     if N.type == "return" :
         str_code += genCode(N.childs[0]) + "\n"
         str_code += "ret\n"
@@ -175,13 +177,10 @@ def genCode(N) :
 
         return str_code
 
-    # print
+    # PRINT
     if N.type == "node_print" :
         genCode(N.childs[0].childs[0])
-        #node_ref = N.childs[0].childs[0
-        #str_code += "get "+str(node_ref.slot)+"\n"
         str_code += "out.i\n"
-        #write_assemblor_file("get "+str(node_ref.slot)+"\n")
         write_assemblor_file("out.i")
         # Dispaly '\n'
         write_assemblor_file("push.i 10")
@@ -190,7 +189,7 @@ def genCode(N) :
 
     # OTHER TYPE (Ignore node and go to childs)
     else :
-        DEBUG_MSG("Ignore node : "+str(N),"WARN")
+        # For all childs, generate code
         for i in range(0,N.nbChild) :
             str_code += genCode(N.childs[i]) + "\n"
         return str_code

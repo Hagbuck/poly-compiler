@@ -61,8 +61,8 @@ def semantic_analyze(node):
             semantic_analyze(child)
 
         end_block()
-
         S.nb_slot = conf.nb_slot - S.nb_args
+        DEBUG_MSG("[STACK] ~ ["+S.ident+"] ~ USED SLOTS : "+str(S.nb_slot)+".")
 
     # Call function node
     elif node.type == "funct_ref":

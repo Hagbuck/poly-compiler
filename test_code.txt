@@ -1,15 +1,21 @@
-toto(x){
-  if(x > 0){
-  print(x);
-    return x + toto(x - 1);
+mult(x,y){
+  var i;
+  var res;
+  res = x;
+  for(i=1;i<=y;i = i +1)
+  {
+    res = res + x;
+    print(res);
+    print(i);
+    print(y);
   }
+  print(i);
+  return res;
 }
-
 
 main()
 {
- var a;
- a = toto(5);
- print(a);
- return a;
+ var myMult;
+ myMult = mult(2,3);
+
 }
