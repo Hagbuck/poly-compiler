@@ -27,14 +27,21 @@ stack = [{}]
 
 # Main function for the semantic analyse
 def semantic_analyze(node):
-
+            
     # Variable declaration node
     if node.type == "node_dcl":
         S = new_symbol(node.val, "var");
 
         S.slot = conf.nb_slot
         conf.nb_slot = conf.nb_slot + 1
-
+        
+    # Assign node, check if the assignement go well to a varRef
+    elif node.type == "node_assign":
+        if node.childs[0].type != "node_varRef":
+            error_compilation(node, "Error : cannot assign " + str(node.childs[1].val) + " to " + str(node.childs[0].val)+ " because " + str(node.childs[0].val) + " is not a varRef")
+        semantic_analyze(node.childs[0])
+        semantic_analyze(node.childs[1])
+    
     # Variable reference node
     elif node.type == "node_varRef":
         S = search_symbol(node.val)
@@ -69,10 +76,10 @@ def semantic_analyze(node):
         S = search_symbol(node.val)
 
         if S.type != "funct":
-            erreur(None, "Error : " + ident + " isn't a function.")
+            error_compilation(node, "Error : " + S.ident + " isn't a function.")
 
         elif S.nb_args != node.nbChild:
-            erreur(None, "Error : " + ident + " require " + S.nb_args + " arguments.")
+            error_compilations(node, "Error : " + S.ident + " require " + S.nb_args + " arguments.")
 
         for child in node.childs:
             semantic_analyze(child)
