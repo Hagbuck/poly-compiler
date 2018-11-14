@@ -216,7 +216,7 @@ def get_statment():
         N_cond = Node("node_cond")
         N_cond.add_child(T)
         N_cond.add_child(B)
-        N_cond.add_child(Node("node_break"))
+        N_cond.add_child(Node("break"))
         N.add_child(N_cond)
         return N
 
@@ -244,7 +244,7 @@ def get_statment():
         cond_node = Node("node_cond")
         cond_node.add_child(test)
         cond_node.add_child(seq_node)
-        cond_node.add_child(Node("node_break"))
+        cond_node.add_child(Node("break"))
 
         # Loop (encaps cond node)
         loop_node = Node("node_loop")
@@ -257,12 +257,26 @@ def get_statment():
         return main_node
 
     # Print
-    if tab_token[index_tab].token == "toke_print" :
+    elif tab_token[index_tab].token == "toke_print" :
         N = Node("node_print")
         accept("toke_print")
-        N.add_child(get_statment())
+        N.add_child(expr())
+        accept("toke_semicolon")
         return N
 
+
+    # Mettre BREAK ET CONTINUE --> ou dans conf
+    elif tab_token[index_tab].token == "toke_break" :
+        N = Node("break")
+        accept("toke_break")
+        accept("toke_semicolon")
+        return N
+
+    elif tab_token[index_tab].token == "toke_continue" :
+        N = Node("continue")
+        accept("toke_continue")
+        accept("toke_semicolon")
+        return N
 
     # Default expression + ";"
     else :

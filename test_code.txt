@@ -1,21 +1,9 @@
-mult(x,y){
-  var i;
-  var res;
-  res = x;
-  for(i=1;i<=y;i = i +1)
-  {
-    res = res + x;
-    print(res);
-    print(i);
-    print(y);
-  }
-  print(i);
-  return res;
-}
-
 main()
 {
- var myMult;
- myMult = mult(2,3);
-
+  var i;
+  while(i<=10)
+  {
+    print i;
+    i = i +1;
+  }
 }

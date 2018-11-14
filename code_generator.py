@@ -25,6 +25,8 @@ from utils import *
 # - - - - - - - - - - - - - - - - - #
 
 nb_label = 0
+list_label_end = []
+list_label_begin = []
 
 # Build assemblor instructions with the given node
 def genCode(N) :
@@ -142,9 +144,52 @@ def genCode(N) :
     elif N.type == "node_dcl" :
         return str_code
 
+    # Loop
+    elif N.type == "node_loop" :
+        Ldebut = nb_label
+        nb_label = nb_label + 1
+        Lfin = nb_label
+        nb_label = nb_label + 1
+        # save end label
+        list_label_begin.append(Ldebut)
+        list_label_end.append(Lfin)
+        DEBUG_MSG("Begin Loop Label .l"+str(Ldebut)+" -> "+str(N),"INFO")
+        DEBUG_MSG("End Loop Label .l"+str(Lfin)+" -> "+str(N),"INFO")
+        # label boucle
+        str_code += ".l" + str(Ldebut) + "\n"
+        write_assemblor_file(".l" + str(Ldebut))
+        # corps boucle
+        str_code += genCode(N.childs[0])
+        # end boucle
+        str_code += "jump l" + str(Ldebut) + "\n"
+        write_assemblor_file("jump l" + str(Ldebut))
+        # exit boucle
+
+        str_code += ".l" + str(Lfin) + "\n"
+        write_assemblor_file(".l" + str(Lfin))
+
+        list_label_end.pop()
+        list_label_begin.pop()
+
+        return str_code
+
+    #BREAK
+    elif N.type == "break" :
+        # PREVOIR LIST VIDE
+        str_code += "jump l" + str(list_label_end[-1]) + " \n"
+        write_assemblor_file( "jump l" + str(list_label_end[-1]))
+        return str_code
+
+    #CONTINUE
+    elif N.type  == "continue" :
+        # PREVOIR LIST VIDE
+        str_code += "jump l" + str(list_label_begin[-1]) + " \n"
+        write_assemblor_file( "jump l" + str(list_label_begin[-1]))
+        return str_code
+
     # COND
     elif N.type == "node_cond" :
-        str_code = ""
+        str_code += ""
         # 3 childs -> if else
         if N.nbChild == 3 :
             L1 = nb_label
@@ -164,6 +209,9 @@ def genCode(N) :
             write_assemblor_file(".l" + str(L2))        # .L2
             str_code += ".l" + str(L2) + "\n"
 
+            DEBUG_MSG("Label .l"+str(L1)+" -> "+str(N.childs[1]),"INFO")
+            DEBUG_MSG("Label .l"+str(L2)+" -> "+str(N.childs[2]),"INFO")
+
         else : # simple if
             L = nb_label
             nb_label = nb_label + 1
@@ -174,12 +222,13 @@ def genCode(N) :
             str_code += genCode(N.childs[1])            # <body>
             write_assemblor_file(".l" + str(L))         # .L
             str_code += ".l" + str(L) + "\n"
+            DEBUG_MSG("Label .l"+str(L)+" -> "+str(N.childs[1]),"INFO")
 
         return str_code
 
     # PRINT
     if N.type == "node_print" :
-        genCode(N.childs[0].childs[0])
+        str_code += genCode(N.childs[0])
         str_code += "out.i\n"
         write_assemblor_file("out.i")
         # Dispaly '\n'
