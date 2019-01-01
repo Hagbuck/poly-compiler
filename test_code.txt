@@ -1,9 +1,31 @@
+function_rec(a,b)
+{
+  if(b != 0)
+    return function_rec(a,b = b - 1);
+
+  else
+    return a;
+}
+
+function_simple(a,b)
+{
+  var iteration;
+  var i;
+  for(i = 1 ; i <= 3 ; i = i + 1)
+  {
+    iteration = function_rec(a,b);
+
+    if(i == 2){print i;continue;}
+
+    print iteration;
+  }
+
+}
+
 main()
 {
-  var i;
-  while(i<=10)
-  {
-    print i;
-    i = i +1;
-  }
+
+    var i;
+    i = 0;
+    function_simple(10,10);
 }

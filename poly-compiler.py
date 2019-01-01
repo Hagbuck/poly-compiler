@@ -88,8 +88,18 @@ def main():
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("Start semantic analyze.", "START")
     semantic_analyze(racine_synthax)
-    DEBUG_MSG("End of the semantic analyze", "OK")
 
+    # Verify main is prensent
+    mainPresent = False
+    for i in range(0,racine_synthax.nbChild) :
+        if racine_synthax.childs[i].val == "main" :
+            mainPresent = True
+
+    if mainPresent == False:
+        error_compilation(Token(None,0,0),"No main function detected. Invalid Compilation.")
+
+    # Continue
+    DEBUG_MSG("End of the semantic analyze", "OK")
     DEBUG_MSG("Tree built.","TREE")
     DEBUG_MSG(debug_mod_line)
     DEBUG_MSG("\n" + display_tree(racine_synthax,0))
