@@ -24,9 +24,27 @@ from synthax_analyze import *
 from sem_analyze import *
 from code_generator import *
 
+# DEFAULT FUNCTION TO CATCH ALL UNKNOW ERROR
+def unknow_error(type,value,traceback):
+    # HEADER ERROR MSG
+    header_error_msg = '\033[91m'+"\n+ ----------------------------------- +\n"
+    header_error_msg +=    "| ....... COMPILATION FAILED ........ | \n"
+    header_error_msg +=    "+ ----------------------------------- +\n"+'\033[0m'
+    # BUILD MSG
+    error_msg = "[ERROR] ~ Unknow error raised. \n[ERROR] ~ Please check your code or contact the developpers.\n"
+
+    #PRINT
+    print header_error_msg + '\033[93m' + error_msg +'\033[0m'
+    # SAVE IN LOG & EXIT
+    log_msg("ERROR","Error during compilation :\n"+error_msg,True)
+    log_msg("END / ERROR","Compilation end with an error statement.",True)
+    print '\033[91m'+ "[END / ERROR] ~ Compilation end with an error statement.\n" +'\033[0m'
+
+
 # SYSTEM MODULES
 import os
 import sys
+sys.excepthook = unknow_error
 
 # - - - - - - - - - - - - - - - - - #
 #                VARS               #
