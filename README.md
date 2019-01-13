@@ -18,7 +18,7 @@
       * [Langage de programmation (<strong>INPUT</strong>)](#langage-de-programmation-input)
          * [Opérateurs unaires](#opérateurs-unaires)
          * [Opérateurs binaires](#opérateurs-binaires)
-      * [Opérateurs logiques](#opérateurs-logiques)
+        * [Opérateurs logiques](#opérateurs-logiques)
       * [Langage assembleur (<strong>OUTPUT</strong>)](#langage-assembleur-output)
    * [Erreur de compilation prise en compte](#erreur-de-compilation-prise-en-compte)
 <!--te-->
@@ -100,7 +100,7 @@ Seul les entiers sont manipulés. En cas de résultat normalement décimal, un e
 - **%** ~ Modulo.
 - **^** ~ Exponentiel.
 
-## Opérateurs logiques
+### Opérateurs logiques
 - **==** ~ Egale.
 - **!=** ~ Différent.
 - **>** ~ Supérieur.
