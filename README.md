@@ -18,7 +18,7 @@
       * [Langage de programmation (<strong>INPUT</strong>)](#langage-de-programmation-input)
          * [Opérateurs unaires](#opérateurs-unaires)
          * [Opérateurs binaires](#opérateurs-binaires)
-      * [Opérateurs logiques](#opérateurs-logiques)
+        * [Opérateurs logiques](#opérateurs-logiques)
       * [Langage assembleur (<strong>OUTPUT</strong>)](#langage-assembleur-output)
    * [Erreur de compilation prise en compte](#erreur-de-compilation-prise-en-compte)
 <!--te-->
@@ -36,7 +36,6 @@ Un **compilateur** est le terme utilisé pour désigner un programme qui transfo
 
  - **Langage utilisé** ~ Python 2.7.
  - **OS Support** ~ Linux, Windows, Mac. *(peu nécéssité l'installation de python.)*
- - **Programation Objet** ~ Oui
  - **Configuration Possible** ~ Oui
 
 # Utilisation
@@ -101,7 +100,7 @@ Seul les entiers sont manipulés. En cas de résultat normalement décimal, un e
 - **%** ~ Modulo.
 - **^** ~ Exponentiel.
 
-## Opérateurs logiques
+### Opérateurs logiques
 - **==** ~ Egale.
 - **!=** ~ Différent.
 - **>** ~ Supérieur.
@@ -123,6 +122,7 @@ Afin de prévenir certaines incohérences dans le code source compilé, des erre
 - ***Operator Missing the second parameter*** ~ Un opérateur attend une expression à droite.
 - ***Parenthesis missing*** ~ Une parenthèse fermante manque à l'expression.
 - ***Constant or identifiant repetition without operator*** ~ Deux variables ou deux constantes ont été détécté sans opérateur séparateur.
+- ***Unknow error raised.*** ~ Une erreur non gérée par le compilateur est survenue.
 
 
 ***Note*** *: Dans le cas où vous en trouverez davantage, n'hésitez pas à ouvrir une [issue](https://github.com/Hagbuck/poly-compiler/issues) sur notre GitHub. Merci*
