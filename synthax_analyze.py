@@ -212,6 +212,8 @@ def get_statment():
         T = expr()
         accept("toke_parantClose")
         B = get_statment()
+        # Add an empty node step
+        B.add_child(Node("step"))
         N_cond = Node("node_cond")
         N_cond.add_child(T)
         N_cond.add_child(B)
@@ -231,13 +233,16 @@ def get_statment():
         test = expr()
         accept("toke_semicolon")
         step = expr()
+        # Add the step in a specific step node
+        node_step = Node("step")
+        node_step.add_child(step)
         accept("toke_parantClose")
         B = get_statment()
 
         # body & step
         seq_node = Node("seq")
         seq_node.add_child(B)
-        seq_node.add_child(step)
+        seq_node.add_child(node_step)
 
         # Test / sequence & break
         cond_node = Node("node_cond")
@@ -264,7 +269,7 @@ def get_statment():
         return N
 
 
-    # Mettre BREAK ET CONTINUE --> ou dans conf
+    # BREAK ET CONTINUE
     elif tab_token[index_tab].token == "toke_break" :
         N = Node("break")
         accept("toke_break")

@@ -25,8 +25,9 @@ from utils import *
 # - - - - - - - - - - - - - - - - - #
 
 nb_label = 0
-list_label_end = []
-list_label_begin = []
+list_label_end = [] #label for end loop
+list_label_begin = [] #label for start loop
+list_label_step = [] #label for step loop
 
 # Build assemblor instructions with the given node
 def genCode(N) :
@@ -144,11 +145,15 @@ def genCode(N) :
         nb_label = nb_label + 1
         Lfin = nb_label
         nb_label = nb_label + 1
+        Lstep = nb_label
+        nb_label = nb_label + 1
         # save end label
         list_label_begin.append(Ldebut)
         list_label_end.append(Lfin)
+        list_label_step.append(Lstep)
         DEBUG_MSG("Begin Loop Label .l"+str(Ldebut)+" -> "+str(N),"INFO")
         DEBUG_MSG("End Loop Label .l"+str(Lfin)+" -> "+str(N),"INFO")
+        DEBUG_MSG("Step Loop Label .l"+str(Lstep)+" -> "+str(N),"INFO")
         # label boucle
         str_code += ".l" + str(Ldebut) + "\n"
         write_assemblor_file(".l" + str(Ldebut))
@@ -164,19 +169,33 @@ def genCode(N) :
 
         list_label_end.pop()
         list_label_begin.pop()
+        list_label_step.pop()
 
         return str_code
 
     #BREAK
     elif N.type == "break" :
-        # PREVOIR LIST VIDE
         str_code += "jump l" + str(list_label_end[-1]) + " \n"
         write_assemblor_file( "jump l" + str(list_label_end[-1]))
         return str_code
 
     #CONTINUE
     elif N.type  == "continue" :
-        # PREVOIR LIST VIDE
+        str_code += "jump l" + str(list_label_step[-1]) + " \n"
+        write_assemblor_file( "jump l" + str(list_label_step[-1]))
+        # JUMP TO THE STEP
+        return str_code
+
+    #STEP
+    elif N.type  == "step" :
+        # EXEC BODY STEP
+        str_code += ".l" +str(list_label_step[-1])
+        write_assemblor_file(".l"+ str(list_label_step[-1]))
+        # Verif if this isn't an empty node (while case)
+        if(N.nbChild >= 1) :
+            genCode(N.childs[0])
+
+        # Jump to the top of loop
         str_code += "jump l" + str(list_label_begin[-1]) + " \n"
         write_assemblor_file( "jump l" + str(list_label_begin[-1]))
         return str_code
