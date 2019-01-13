@@ -48,6 +48,10 @@ def lexique_analyze_line(code,num_line) :
 
         current_char = code[i]
 
+        # Char is a comment
+        if(current_char == '#'):
+            break;
+
         # Char is a space
         if(current_char == " " or current_char == "\n" or current_char == "\t") :
             current_toke = Token(None,None,None);
