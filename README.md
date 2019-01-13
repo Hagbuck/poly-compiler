@@ -19,6 +19,10 @@
          * [Opérateurs unaires](#opérateurs-unaires)
          * [Opérateurs binaires](#opérateurs-binaires)
         * [Opérateurs logiques](#opérateurs-logiques)
+        * [Variables et Fonctions](#variables-et-fonctions)
+        * [Boucles](#boucles)
+        * [Autres](#autres)
+        * [Commenaire](#commentaire)
       * [Langage assembleur (<strong>OUTPUT</strong>)](#langage-assembleur-output)
    * [Erreur de compilation prise en compte](#erreur-de-compilation-prise-en-compte)
 <!--te-->
@@ -84,8 +88,9 @@ Ce compilateur propose certains paramétrages de configuration. Pour ce faire, o
 # Description technique des langages
 
 ## Langage de programmation (**INPUT**)
-Pour le moment le compilateur ne prend en compte que les expressions mathématiques. Il prend en compte tous les opérateurs unaires, binaires et logiques classiques. Les priorités opératoires sont respectées et les parenthèses sont autorisées.
+Poly-compiler prend en compte tous les opérateurs unaires, binaires et logiques classiques. Les priorités opératoires sont respectées et les parenthèses sont autorisées.
 Seul les entiers sont manipulés. En cas de résultat normalement décimal, un entier arrondi sera donné.
+Vous trouverez également ci-joint toutes les fonctionnalités embarquées par le compilateur.
 
 ### Opérateurs unaires
 - **-** ~ "moins" unaire.
@@ -110,6 +115,26 @@ Seul les entiers sont manipulés. En cas de résultat normalement décimal, un e
 - **and** ~ *Et* logique.
 - **or** ~ *Ou* logique.
 
+### Variables et Fonctions
+- Déclaration de variable ~ `'var a;'`
+- Assignation de variable ~ `'a = 10;'`
+- Déclaration d'une fonction ~ `'foo(param1,param2,...){ [...] return myReturn;}'`
+- Utilisation d'une fonction ~ `'varFoo = foo(param1,param2)'`
+- Affichage d'une variable : `'print a;'` ou `'print(a);'`
+- Possibilité d'utiliser une fonction comme une variable (ex : `'print foo(param1,param2) + 15 ;'`)
+
+### Boucles
+- **for** ~ `'for(init;cond;step)'`
+- **while** ~ `'while(cond)'`
+- **Récursivité autorisée**
+
+### Autres
+- Un bloc `'main(){}'` doit toujours être présent. Autrement, cela déclenche une erreur.
+- Les fonctions doivent êtres définies avant le bloc “main”
+- Une variable définie mais non initialisée vaudra par défaut 0.
+
+### Commentaire
+Vous pouvez laisser un commentaire dans le code sur une ligne dédié ou en fin de ligne en précédant votre message par le caractère "#".
 
 ## Langage assembleur (**OUTPUT**)
 Le langage assembleur est décrit dans le fichier joint nommé : ***msm_instructs.txt***.
