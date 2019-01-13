@@ -1,5 +1,28 @@
+# - - - - - - - - - - - - - - - - - - - - - - - #
+# 			Poly-Compiler ~ Test file			#
+# Auteur : Corentin TROADEC & Vuillemin Anthony #
+# - - - - - - - - - - - - - - - - - - - - - - - #
+
+# Foo function
+foo(param1,param2)
+{
+	return param1 + param2;
+}
+
+# Main Function
 main()
 {
-	var i;
-	break;
+	# Déclaration et Initialisation des variables
+	var i;	var j;	var res;
+
+	i = 2;
+	j = 4;
+
+	# Body
+	res = i * j ; # This is a multiplication
+	print(res);
+	print foo(res,1);
+
+	# End of program
+
 }
