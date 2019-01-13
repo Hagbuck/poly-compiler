@@ -87,6 +87,7 @@ hashmap_toke = {
 "or" : "toke_or",
 "var" : "toke_var",
 "print" : "toke_print",
+"printc" : "toke_print_char",
 "break" : "toke_break",
 "continue" : "toke_continue"
 }

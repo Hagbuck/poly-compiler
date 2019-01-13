@@ -140,9 +140,6 @@ def main():
 # Execute only if run as a script
 if __name__ == "__main__":
 
-    # Active debug mod ?
-    #if len(sys.argv) > 1 :
-
     for arg in sys.argv :
 
         if arg.lower() == "-d"  :

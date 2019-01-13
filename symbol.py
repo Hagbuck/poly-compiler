@@ -1,3 +1,15 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+#                           Project : Compilateur (Python)                    #
+#                                                                             #
+#                                  File : symbol.py                           #
+#                                                                             #
+#           Description : Symbol are used into the semantic analyse           #
+#                                                                             #
+#                Contributors : Corentin TROADEC & Anthony Vuillemin          #
+#                                                                             #
+#                               Date : September 2018                         #
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - #
+
 #CLASS SYMBOL
 class Symbol:
     #Declaration

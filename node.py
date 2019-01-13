@@ -138,6 +138,6 @@ def display_tree(node,level) :
     #DISPLAY CHILDS
     if node != None :
         for child in node.childs :
-            # Add string child in string racien
+            # Add string child in string racine
             return_str += display_tree(child,level + 1)
     return return_str

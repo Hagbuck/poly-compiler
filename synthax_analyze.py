@@ -48,7 +48,6 @@ def atom() :
     #Search an atom but end of the list, so a paramter missing
     if index_tab >= len(tab_token) : # and tab_token[-1].token != "toke_parantClose" :
         error_compilation(tab_token[index_tab-1],"Operator Missing the second parameter.")
-    #if index_tab < len(tab_token)-1 and
     current_toke = tab_token[index_tab]
 
     #UNAIRE OPERATOR

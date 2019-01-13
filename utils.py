@@ -61,10 +61,6 @@ def error_compilation(token_or_node,msg) :
 def log_msg(type,msg, compil_error = False) :
 
     if log_activation == True :
-        # Already display when this is a compilation error msg.
-        #if compil_error == False :
-        #    print "["+type+"] ~ " + msg
-
         now = datetime.datetime.now()
         str_now = now.strftime("%d/%m/%Y %H:%M:%S-")
         str_now += str(now.microsecond)
@@ -99,7 +95,6 @@ def DEBUG_MSG(msg,type = "",saveInLogFile = True) :
     # Save in log file ?
     if saveInLogFile == True :
         log_msg(type,msg)
-
 
     # Debug mod on ?
     if debug_mod == True :
