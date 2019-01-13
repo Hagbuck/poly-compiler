@@ -1,0 +1,17 @@
+fonction(a){
+    var i;
+    for(i = 0; i < 5; i = i + 1){
+        if( i == a )
+            break; # si i = a, alors on sort de la boucle
+        print i;
+    }
+    return i;
+}
+
+main()
+{
+	var i;
+	i = 3;
+	
+	print fonction(i);
+}
