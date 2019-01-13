@@ -36,7 +36,6 @@ Un **compilateur** est le terme utilisé pour désigner un programme qui transfo
 
  - **Langage utilisé** ~ Python 2.7.
  - **OS Support** ~ Linux, Windows, Mac. *(peu nécéssité l'installation de python.)*
- - **Programation Objet** ~ Oui
  - **Configuration Possible** ~ Oui
 
 # Utilisation
@@ -123,6 +122,7 @@ Afin de prévenir certaines incohérences dans le code source compilé, des erre
 - ***Operator Missing the second parameter*** ~ Un opérateur attend une expression à droite.
 - ***Parenthesis missing*** ~ Une parenthèse fermante manque à l'expression.
 - ***Constant or identifiant repetition without operator*** ~ Deux variables ou deux constantes ont été détécté sans opérateur séparateur.
+- ***Unknow error raised.*** ~ Une erreur non gérée par le compilateur est survenue.
 
 
 ***Note*** *: Dans le cas où vous en trouverez davantage, n'hésitez pas à ouvrir une [issue](https://github.com/Hagbuck/poly-compiler/issues) sur notre GitHub. Merci*
