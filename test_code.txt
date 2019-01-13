@@ -1,18 +1,5 @@
 main()
 {
 	var i;
-	i = 0 ;
-	while(i <= 10 )
-	{
-		var j;
-		for(j = 0;j<=10;j = j + 1 )
-		{
-			print i * j ;
-		}
-		i = i + 1;
-		if(i == 3)
-			continue;
-		else
-			print 555555555;
-	}
+	break;
 }

@@ -44,7 +44,7 @@ def error_compilation(token_or_node,msg) :
     # BUILD MSG
     error_msg = "[ERROR] ~ " + msg +"\n"
 
-    if token_or_node != None:
+    if token_or_node != None and isinstance(token_or_node,Token) :
         error_msg +=  "[ERROR] ~ An error has been detected : Line "+str(token_or_node.line)
         error_msg +=" & Column "+str(token_or_node.col)+"."
         error_msg += "\n[ERROR] ~ "+str(token_or_node)

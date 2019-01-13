@@ -175,12 +175,20 @@ def genCode(N) :
 
     #BREAK
     elif N.type == "break" :
+        # Break outside loop
+        if(len(list_label_end) == 0 ):
+            error_compilation(N,"`break` statement not within loop.")
+
         str_code += "jump l" + str(list_label_end[-1]) + " \n"
         write_assemblor_file( "jump l" + str(list_label_end[-1]))
         return str_code
 
     #CONTINUE
     elif N.type  == "continue" :
+        # Continue outside loop
+        if(len(list_label_step) == 0):
+            error_compilation(N,"`continue` statement not within loop.")
+
         str_code += "jump l" + str(list_label_step[-1]) + " \n"
         write_assemblor_file( "jump l" + str(list_label_step[-1]))
         # JUMP TO THE STEP
@@ -188,6 +196,9 @@ def genCode(N) :
 
     #STEP
     elif N.type  == "step" :
+        # Continue outside loop
+        if(len(list_label_begin) == 0 ):
+            error_compilation(N,"`continue` statement not within loop.")
         # EXEC BODY STEP
         str_code += ".l" +str(list_label_step[-1])
         write_assemblor_file(".l"+ str(list_label_step[-1]))
