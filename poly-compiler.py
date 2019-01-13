@@ -150,7 +150,7 @@ if __name__ == "__main__":
             active_log_save()
             DEBUG_MSG("LOG SAVE : ON.","INFO")
 
-        elif arg.lower() == "-ld" or arg == "-dl" :
+        elif arg.lower() == "-ld" or arg.lower() == "-dl" :
             active_debug_mod()
             active_log_save()
             DEBUG_MSG("DEBUG MOD : ON.","INFO")

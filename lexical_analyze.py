@@ -28,6 +28,7 @@ import re
 
 # Launch the lexical analyze line by line
 def lexique_analyze(fullCode) :
+    add_pow_function(True)
     # Index line
     num_line = 1
     # For each lines
@@ -108,3 +109,11 @@ def check_identifier(text) :
         word += text[i]
         i = i + 1
     return word,i
+
+# Add in the lexical analyze the system function pow if add is true
+def add_pow_function(add) :
+	text = ""
+	if(add) :
+		text += "pow_system(a,b){if(b==0){return 1;}var res;var i;res = a;for(i = 0;i < b-1;i = i + 1){res = res * a;}return res;}"
+		lexique_analyze_line(text,None)
+	return text

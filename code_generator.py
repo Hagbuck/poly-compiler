@@ -85,19 +85,13 @@ def genCode(N) :
         write_assemblor_file("push.i "+str(N.val))
         return "push.i "+str(N.val) + "\n"
 
-    # POW
+	# POW
     elif N.type == "node_pow" :
-        # Eval right child
-        n = eval_expr(N.childs[1])
-        # Build expression pow
-        # General case
-        if n != 0 :
-            return pow_compil(n,N) + "\n"
-        # Exception with pow 0
-        else :
-            str_code = "push.i 1\npush.i 0\nadd.i\n"
-            write_assemblor_file(str_code)
-            return str_code
+        write_assemblor_file("prep pow_system")
+        str_code += genCode(N.childs[0])
+        str_code += genCode(N.childs[1])
+        write_assemblor_file("call 2")
+        return str_code
 
     # BINAIRE OPERATOR
     elif N.type in dict_bin_node_to_assemblor :
